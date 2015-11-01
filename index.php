@@ -1,5 +1,5 @@
 <?php
- 
+
 $application = __DIR__;
 $modules = __DIR__.'/../kohana/modules';
 $system = __DIR__.'/../kohana/system';
