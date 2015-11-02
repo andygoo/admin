@@ -43,15 +43,15 @@ function option($items, $cat_id, $level=0) {
 	</div>
 	<div class="form-group">
 		<label class="col-sm-1 control-label">文章封面</label>
+		<input type="hidden" class="form-control" name="pic" value="<?= $info['pic']?>">
 		<div class="col-sm-2" id="fsUploadProgress">
-			<input type="hidden" class="form-control" name="pic" value="<?= $info['pic']?>">
 			<?php if (!empty($info['pic'])):?>
-			<div class="up-item" style="position:relative">
-			<button class="close" style="position:absolute;right:2px;top:0px;"><span>&times;</span></button>
-			<img class="img-thumbnail" width="170" src="<?= $info['pic']?>">
+			<div class="up-item">
+			    <button class="close"><span>&times;</span></button>
+			    <img class="img-thumbnail" src="<?= $info['pic']?>">
 			</div>
 			<?php endif;?>
-			<img class="img-thumbnail" width="170" id="pickfile" src="<?= URL::site('media/img/default.png')?>" <?php if(!empty($info['pic'])):?>style="display: none"<?php endif;?>>
+			<img class="img-thumbnail" src="<?= URL::site('media/img/default.png')?>" id="pickfile" <?php if (!empty($info['pic'])):?>style="display:none"<?php endif;?>>
 		</div>
 	</div>
 	<div class="form-group">
@@ -115,76 +115,22 @@ tinyMCE.init({
 div.mce-fullscreen {z-index: 9999;}
 </style>
 
+<style>
+.up-item{float:left;width:160px;margin:5px;position:relative}
+.up-item .close{position:absolute;right:3px;top:0;}
+.up-item .img-thumbnail{width:160px;}
+.up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
+</style>
+<?php include Kohana::find_file('views', 'plupload');?>
 
-<?= HTML::script('media/qiniujs/plupload/plupload.full.min.js')?>
 <script>
-function FileProgress(file, targetID) {
-    this.fileProgressID = file.id;
-    this.file = file;
-    this.fileProgressWrapper = $('#' + this.fileProgressID);
-    
-    if (!this.fileProgressWrapper.length) {
-		var html = '<div class="up-item" style="position:relative" id="' + file.id +'">';
-			html += '<button class="close" style="position:absolute;right:2px;top:0;"><span>&times;</span></button>';
-			html += '<img class="img-thumbnail" width="170" src="" />';
-	    	html += '<div class="progress" style="position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none">'
-	    	html += '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>';
-	    	html += '</div>';
-			html += '</div>';
-		this.fileProgressWrapper = $(html);
-		$('#'+targetID).append(this.fileProgressWrapper);
-		
-		previewImage(file,function(imgsrc){
-			$('#'+file.id).find('img').attr('src', imgsrc);
-		});
-    }
-}
-FileProgress.prototype.setProgress = function(percentage) {
-    percentage = parseInt(percentage, 10);
-    var progressbar = this.fileProgressWrapper.find('.progress-bar');
-    progressbar.attr('aria-valuenow', percentage).css('width', percentage + '%');
-};
-FileProgress.prototype.setComplete = function(up, file, info) {
-	var res = info.response;
-	res = eval('('+res+')');
-	if (res.status=='ok') {
-	    var url = '/imagefly/w200'+res.data;
-	    $('#'+file.id).find('img').attr('src', url);
-	    $('input[name=pic]').val(url);
-	}
-    this.fileProgressWrapper.find('.progress').hide();
-    //this.fileProgressWrapper.find('.close').hide();
-};
-
-function previewImage(file,callback) {
-	if(!file || !/image\//.test(file.type)) return;
-	if(file.type=='image/gif') {
-		var fr = new mOxie.FileReader();
-		fr.onload = function(){
-			callback(fr.result);
-			//fr.destroy();
-			fr = null;
-		}
-		fr.readAsDataURL(file.getSource());
-	}else{
-		var preloader = new mOxie.Image();
-		preloader.onload = function() {
-			preloader.downsize(300, 300);
-			var imgsrc = preloader.type=='image/jpeg' ? preloader.getAsDataURL('image/jpeg',80) : preloader.getAsDataURL();
-			callback && callback(imgsrc);
-			preloader.destroy();
-			preloader = null;
-		};
-		preloader.load(file.getSource());
-	}
-}
 $(function() {
 	var uploader = new plupload.Uploader({
 		browse_button : 'pickfile',
 		multi_selection: false,
 		url : '<?= URL::site('upload/ajaxadd')?>',
-		flash_swf_url : '<?= URL::site('media/qiniujs/plupload/Moxie.swf')?>',
-		silverlight_xap_url : '<?= URL::site('media/qiniujs/plupload/Moxie.xap')?>',
+		flash_swf_url : '<?= URL::site('media/plupload/Moxie.swf')?>',
+		silverlight_xap_url : '<?= URL::site('media/plupload/Moxie.xap')?>',
 		filters: {
 			mime_types: [{
 				title : "图片文件", 
@@ -204,6 +150,7 @@ $(function() {
     		var remove_btn = $('#'+file.id).find('.close');
     		remove_btn.click(function(){
     			uploader.removeFile(file);
+    			$('#pickfile').show();
     		});
         });
         this.start();
@@ -218,6 +165,16 @@ $(function() {
 	uploader.bind('FileUploaded',function(up, file, info){
         var progress = new FileProgress(file, 'fsUploadProgress');
         progress.setComplete(up, file, info);
+
+        $('#'+file.id).find('.close').show();
+        
+    	var res = info.response;
+    	res = eval('('+res+')');
+    	if (res.status=='ok') {
+    	    var url = '/imagefly/w200'+res.data;
+    	    $('#'+file.id).find('img').attr('src', url);
+    	    $('input[name=pic]').val(url);
+    	}
 	});
 
 	$(document).on('click', '.up-item .close', function(){
@@ -226,6 +183,4 @@ $(function() {
 		$('#pickfile').show();
 	});
 });
-
 </script>
-
