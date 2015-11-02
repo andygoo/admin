@@ -30,6 +30,12 @@ function option($items, $cat_id, $level=0) {
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="col-sm-1 control-label">显示网址</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="custom_url" value="<?= $info['custom_url']?>">
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="col-sm-1 control-label">文章摘要</label>
 		<div class="col-sm-6">
 			<textarea name="brief" class="form-control" rows="3"><?= $info['brief']?></textarea>
