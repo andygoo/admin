@@ -154,6 +154,7 @@ class Controller_Upload extends Controller_Website {
         list($width, $height) = getimagesize($file_path);
         $file_src = str_replace($directory, '', $file_path);
         $file_src = str_replace('\\', '/', $file_src);
+        $file_src = trim($file_src, '/');
     
         $data = array(
             'user_name' => $this->user['username'],
@@ -162,7 +163,7 @@ class Controller_Upload extends Controller_Website {
             'img_width' => $width,
             'img_height' => $height,
             'file_path' => $file_path,
-            'file_src' => trim($file_src,'/'),
+            'file_src' => $file_src,
             'add_time' => strtotime('now'),
         );
         $uploadModel = Model::factory('upload');

@@ -48,7 +48,11 @@ function option($items, $cat_id, $level=0) {
 			<?php if (!empty($info['pic'])):?>
 			<div class="up-item">
 			    <button class="close"><span>&times;</span></button>
-			    <img class="img-thumbnail" src="<?= $info['pic']?>">
+			    <?php if (strpos($info['pic'], '://') !== false):?>
+                    <?= HTML::image($info['pic'].'?imageView2/2/w/160/h/120', array('width'=>160, 'class'=>'img-thumbnail')) ?>
+                <?php else:?>
+                    <?= HTML::image('/imagefly/w200-h150-c/' . $info['pic'], array('width'=>160, 'class'=>'img-thumbnail')) ?>
+                <?php endif;?>
 			</div>
 			<?php endif;?>
 			<img class="img-thumbnail" src="<?= URL::site('media/img/default.png')?>" id="pickfile" <?php if (!empty($info['pic'])):?>style="display:none"<?php endif;?>>
@@ -107,7 +111,7 @@ tinyMCE.init({
   	autosave_ask_before_unload: false,
   	convert_urls: false,
 	height : 400,
-	content_css: ['<?= URL::site('media/css/bootstrap.min.css')?>','<?= URL::site('media/css/preview.css')?>'],
+	content_css: ['<?= URL::site('media/bootstrap/css/bootstrap.min.css')?>','<?= URL::site('media/css/preview.css')?>'],
 	language: 'zh_CN'
 });
 </script>
@@ -171,9 +175,9 @@ $(function() {
     	var res = info.response;
     	res = eval('('+res+')');
     	if (res.status=='ok') {
-    	    var url = '/imagefly/w200'+res.data;
+    	    var url = '/imagefly/w200-h150-c/'+res.data;
     	    $('#'+file.id).find('img').attr('src', url);
-    	    $('input[name=pic]').val(url);
+    	    $('input[name=pic]').val(res.data);
     	}
 	});
 

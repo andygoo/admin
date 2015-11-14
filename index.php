@@ -4,6 +4,7 @@ $application = __DIR__;
 $modules = __DIR__.'/../kohana/modules';
 $system = __DIR__.'/../kohana/system';
 
+define('DOCROOT', realpath(__DIR__).DIRECTORY_SEPARATOR);
 define('APPPATH', realpath($application).DIRECTORY_SEPARATOR); 
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
