@@ -99,7 +99,7 @@ $(function() {
     	var res = info.response;
     	res = eval('('+res+')');
     	if (res.status=='ok') {
-    	    var url = '/imagefly/w200'+res.data;
+    	    var url = '/imagefly/w200/'+res.data;
     	    $('#'+file.id).find('img').attr('src', url);
     	}
 	});
