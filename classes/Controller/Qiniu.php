@@ -1,11 +1,22 @@
 <?php
 
-require 'D:/vendor/qiniu/autoload.php';
+require APPPATH . 'vendor/qiniu/autoload.php';
 
 use Qiniu\Auth;
 
 class Controller_Qiniu extends Controller_Website {
 
+    public function action_uptoken() {
+        $accessKey = 'o10EI_XJGKSSWoD-Zn-qWw72saZB3DIxHnJ1ghJ1';
+        $secretKey = 'cCN4kA-tu4oxz6cnoTIDvv-9XvwI2g6-mwoXe8et';
+    
+        $bucket = 'jiesc-net';
+        $auth = new Auth($accessKey, $secretKey);
+        $token = $auth->uploadToken($bucket);
+        echo json_encode(array('uptoken'=>$token));
+        exit;
+    }
+    
     public function action_upload() {
         $where = array();
         $where['ORDER'] = 'id DESC';
@@ -19,17 +30,6 @@ class Controller_Qiniu extends Controller_Website {
         $this->content->pager = $pager;
     }
     
-    public function action_uptoken() {
-        $accessKey = 'o10EI_XJGKSSWoD-Zn-qWw72saZB3DIxHnJ1ghJ1';
-        $secretKey = 'cCN4kA-tu4oxz6cnoTIDvv-9XvwI2g6-mwoXe8et';
-        
-        $bucket = 'jiesc-net';
-        $auth = new Auth($accessKey, $secretKey);
-        $token = $auth->uploadToken($bucket);
-        echo json_encode(array('uptoken'=>$token));
-        exit;
-    }
-
     public function action_add() {
         $img_url = Arr::get($_GET, 'img_url');
         $file_size = Arr::get($_GET, 'file_size');
