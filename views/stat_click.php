@@ -31,10 +31,10 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
         </select>
     </div>
     <div class="form-group">
-        <input type="text" name="date_start" class="form-control" id="date_start" style="width:120px" value="<?= Arr::get($_GET, 'date_start')?>" placeholder="开始日期">
-    </div>
+        <input type="text" name="date_start" class="form-control" id="date_start" style="width:120px" value="<?= Arr::get($_GET, 'date_start', date('Ymd', strtotime('-7 day')))?>" placeholder="开始日期">
+    </div> -
     <div class="form-group">
-        <input type="text" name="date_end" class="form-control" id="date_end" style="width:120px" value="<?= Arr::get($_GET, 'date_end')?>" placeholder="截止日期">
+        <input type="text" name="date_end" class="form-control" id="date_end" style="width:120px" value="<?= Arr::get($_GET, 'date_end', date('Ymd', strtotime('-1 day')))?>" placeholder="截止日期">
     </div>
     <div class="form-group">
         <input type="text" name="type" class="form-control" value="<?= Arr::get($_GET, 'type')?>" placeholder="">
@@ -48,9 +48,12 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
 <tr>
 	<th>日期</th>
 	<th>平台</th>
-	<th>统计对象</th>
 	<th <?php if($order=='asc'):?>class="dropup"<?php endif;?>">
-	    <a href="<?= URL::site('stat/click' . URL::query(array('sort'=>'num|' . ($order=='desc' ? 'asc' : 'desc'))))?>">数量</a>
+	    <a class="ajax-click" href="<?= URL::site('stat/click' . URL::query(array('sort'=>'type|' . ($order=='desc' ? 'asc' : 'desc'))))?>">统计对象</a>
+	    <?php if($field=='type'):?><span class="caret"></span><?php endif;?>
+	</th>
+	<th <?php if($order=='asc'):?>class="dropup"<?php endif;?>">
+	    <a class="ajax-click" href="<?= URL::site('stat/click' . URL::query(array('sort'=>'num|' . ($order=='desc' ? 'asc' : 'desc'))))?>">数量</a>
 	    <?php if($field=='num'):?><span class="caret"></span><?php endif;?>
 	</th>
 </tr>
