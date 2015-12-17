@@ -31,12 +31,19 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
         </select>
     </div>
     <div class="form-group">
-        <input type="text" name="date" class="form-control" id="date" value="<?= Arr::get($_GET, 'date', date('Ymd', strtotime('-1 day')))?>" placeholder="日期">
+        <select class="form-control" name="entrance">
+        <option value=""> - 统计区域 - </option>
+        <?php foreach ($entra as $key => $item):?>
+        <option value="<?= $key?>" <?php if(Arr::get($_GET, 'entrance')==$key):?>selected<?php endif;?>><?= $item?></option>
+        <?php endforeach;?>
+        </select>
     </div>
-    <!-- 
     <div class="form-group">
-        <input type="text" name="entrance" class="form-control" value="<?= Arr::get($_GET, 'entrance')?>" placeholder="">
-    </div> -->
+        <input type="text" name="date_start" class="form-control" id="date_start" style="width:120px" value="<?= Arr::get($_GET, 'date_start', date('Ymd', strtotime('-1 day')))?>" placeholder="开始日期" required>
+    </div> -
+    <div class="form-group">
+        <input type="text" name="date_end" class="form-control" id="date_end" style="width:120px" value="<?= Arr::get($_GET, 'date_end', date('Ymd', strtotime('-1 day')))?>" placeholder="截止日期" required>
+    </div>
     <button type="submit" class="btn btn-info">查找</button>
 </form>
 <br>
@@ -46,25 +53,25 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
 <tr>
 	<th>日期</th>
 	<th>平台</th>
-	<th>入口</th>
-	<th>首页pv</th>
-	<th>列表页pv</th>
-	<th>详情页pv</th>
-	<th>拨打电话次数</th>
-	<th>提交线索次数</th>
+	<th>统计区</th>
+	<th>首页UV / PV</th>
+	<th>列表页UV / PV</th>
+	<th>详情页UV / PV</th>
+	<th>拨打电话UV / PV</th>
+	<th>提交线索UV / PV</th>
 </tr>
 </thead>
 <tbody>
 <?php foreach($list as $item): ?>
 <tr>
 	<td><?= $item['date'] ?></td>
-	<td><?= $plats[$item['plat']] ?: '' ?></td>
-	<td><?= $item['entrance'] ?></td>
-	<td><?= $item['pv_home'] ?></td>
-	<td><?= $item['pv_list'] ?></td>
-	<td><?= $item['pv_detail'] ?></td>
-	<td><?= $item['num_call'] ?></td>
-	<td><?= $item['num_phone'] ?></td>
+	<td><?= isset($plats[$item['plat']]) ? $plats[$item['plat']] : '' ?></td>
+	<td><?= isset($entra[$item['entrance']]) ? $entra[$item['entrance']] : $item['entrance'] ?></td>
+	<td><?= $item['uv_home'] ?> / <?= $item['pv_home'] ?></td>
+	<td><?= $item['uv_list'] ?> / <?= $item['pv_list'] ?></td>
+	<td><?= $item['uv_detail'] ?> / <?= $item['pv_detail'] ?></td>
+	<td><?= $item['uv_phone'] ?> / <?= $item['pv_phone'] ?></td>
+	<td><?= $item['uv_call'] ?> / <?= $item['pv_call'] ?></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
@@ -75,13 +82,23 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
 <script>
 $(function () {
     var picker1 = new Pikaday({
-        field: document.getElementById('date'),
+        field: document.getElementById('date_start'),
         minDate: new Date('2015-06-01'),
         maxDate: new Date('<?php echo date('Y-m-d')?>'),
         onSelect: 	function() {
             var d = this.toString();
 			d = d.replace(/-/g, '');
-			$('input[name=date]').val(d);
+			$('input[name=date_start]').val(d);
+		}
+    });
+    var picker2 = new Pikaday({
+        field: document.getElementById('date_end'),
+        minDate: new Date('2015-06-01'),
+        maxDate: new Date('<?php echo date('Y-m-d')?>'),
+        onSelect: 	function() {
+            var d = this.toString();
+			d = d.replace(/-/g, '');
+			$('input[name=date_end]').val(d);
 		}
     });
 });

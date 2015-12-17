@@ -2,7 +2,7 @@
 <?= HTML::style('media/pikaday/css/pikaday.css')?>
 <?= HTML::script('media/pikaday/js/pikaday.js')?>
 
-<h3 class="page-header">点击统计</h3>
+<h3 class="page-header">APP首页坑位点击统计</h3>
 
 <style>
 .dropdown-menu>li>label {
@@ -31,10 +31,10 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
         </select>
     </div>
     <div class="form-group">
-        <input type="text" name="date_start" class="form-control" id="date_start" style="width:120px" value="<?= Arr::get($_GET, 'date_start', date('Ymd', strtotime('-7 day')))?>" placeholder="开始日期">
+        <input type="text" name="date_start" class="form-control" id="date_start" style="width:120px" value="<?= Arr::get($_GET, 'date_start', date('Ymd', strtotime('-1 day')))?>" placeholder="开始日期" required>
     </div> -
     <div class="form-group">
-        <input type="text" name="date_end" class="form-control" id="date_end" style="width:120px" value="<?= Arr::get($_GET, 'date_end', date('Ymd', strtotime('-1 day')))?>" placeholder="截止日期">
+        <input type="text" name="date_end" class="form-control" id="date_end" style="width:120px" value="<?= Arr::get($_GET, 'date_end', date('Ymd', strtotime('-1 day')))?>" placeholder="截止日期" required>
     </div>
     <div class="form-group">
         <input type="text" name="type" class="form-control" value="<?= Arr::get($_GET, 'type')?>" placeholder="">
@@ -62,7 +62,7 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
 <?php foreach($list as $item): ?>
 <tr>
 	<td><?= $item['date'] ?></td>
-	<td><?= $plats[$item['plat']] ?: '' ?></td>
+	<td><?= isset($plats[$item['plat']]) ? $plats[$item['plat']] : $item['plat'] ?></td>
 	<td><?= $item['type'] ?></td>
 	<td><?= $item['num'] ?></td>
 </tr>
@@ -76,7 +76,6 @@ abbr[data-original-title], abbr[title] {border-bottom: none;}
 $(function () {
     var picker1 = new Pikaday({
         field: document.getElementById('date_start'),
-        //format: 'YYYY/MM/DD',
         minDate: new Date('2015-06-01'),
         maxDate: new Date('<?php echo date('Y-m-d')?>'),
         onSelect: 	function() {
@@ -87,7 +86,6 @@ $(function () {
     });
     var picker2 = new Pikaday({
         field: document.getElementById('date_end'),
-        //format: 'YYYY/MM/DD',
         minDate: new Date('2015-06-01'),
         maxDate: new Date('<?php echo date('Y-m-d')?>'),
         onSelect: 	function() {
