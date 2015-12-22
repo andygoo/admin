@@ -4,23 +4,6 @@
 
 <h3 class="page-header">转化率统计</h3>
 
-<style>
-.dropdown-menu>li>label {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: 400;
-  line-height: 1.42857143;
-  color: #333;
-  white-space: nowrap;
-  cursor: pointer;
-}
-.dropdown-menu>li>label:hover {
-    color: #262626;
-    background-color: #f5f5f5
-}
-abbr[data-original-title], abbr[title] {border-bottom: none;}
-</style>
 <form class="form-inline" method="get">
     <div class="form-group">
         <select class="form-control" name="plat">
