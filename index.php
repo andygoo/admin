@@ -37,7 +37,9 @@ Kohana::modules(array(
 	'devtools'   => MODPATH.'devtools',
 	'logreader'  => MODPATH.'logreader',
 	'myadmin'    => MODPATH.'myadmin',
+	'phpredmin'  => MODPATH.'phpredmin',
 	'media'      => MODPATH.'media',
+	//'sso'        => MODPATH.'sso',
 ));
 Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 
