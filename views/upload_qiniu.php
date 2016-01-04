@@ -55,27 +55,6 @@
 
 <?= HTML::script('media/js/qiniu.js')?>
 <script>
-function format_time(d, pattern) {
-	pattern = pattern || 'yyyy-MM-dd';
-	var y = d.getFullYear().toString(),
-		o = {
-			M: d.getMonth() + 1, //month
-			d: d.getDate(), //day
-			h: d.getHours(), //hour
-			m: d.getMinutes(), //minute
-			s: d.getSeconds() //second
-		};
-	pattern = pattern.replace(/(y+)/ig, function(a, b) {
-		return y.substr(4 - Math.min(4, b.length));
-	});
-	for (var i in o) {
-		pattern = pattern.replace(new RegExp('(' + i + '+)', 'g'), function(a, b) {
-			return (o[i] < 10 && b.length > 1) ? '0' + o[i] : o[i];
-		});
-	}
-	return pattern;
-}
-
 $(function() {
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4',

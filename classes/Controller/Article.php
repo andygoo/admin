@@ -115,25 +115,6 @@ class Controller_Article extends Controller_Website {
         }
     }
 
-    public function action_stat() {
-        $m_category = Model::factory('category');
-        $cat_list = $m_category->getAll()->as_array('id', 'name');
-        
-        $where = array();
-        $where['GROUP'] = 'cid';
-        $fields = 'cid as label, count(*) as value';
-        $m_article = Model::factory('article');
-        $ret = $m_article->getAll($where, $fields)->as_array('label', 'value');
-        $data = array();
-        foreach ($ret as $label=>$value) {
-            $label = isset($cat_list[$label]) ? $cat_list[$label] : 'unknow';
-            $data[$label] = $value;
-        }
-        
-        $this->content = View::factory('article_stat');
-        $this->content->data = $data;
-    }
-    
     protected function _get_data($post) {
         $data = array();
 
@@ -148,4 +129,3 @@ class Controller_Article extends Controller_Website {
     }
     
 }
-
