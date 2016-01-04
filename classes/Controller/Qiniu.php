@@ -7,8 +7,9 @@ use Qiniu\Auth;
 class Controller_Qiniu extends Controller_Website {
 
     public function action_uptoken() {
-        $accessKey = 'o10EI_XJGKSSWoD-Zn-qWw72saZB3DIxHnJ1ghJ1';
-        $secretKey = 'cCN4kA-tu4oxz6cnoTIDvv-9XvwI2g6-mwoXe8et';
+        $qiniu_config = Kohana::config('qiniu.default');
+        $accessKey = $qiniu_config['access_key'];
+        $secretKey = $qiniu_config['secret_key'];
     
         $bucket = 'jiesc-net';
         $auth = new Auth($accessKey, $secretKey);
