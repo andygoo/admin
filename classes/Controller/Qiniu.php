@@ -56,7 +56,7 @@ class Controller_Qiniu extends Controller_Website {
         $id = Arr::get($_GET, 'id');
         $uploadModel = Model::factory('upload_qiniu');
     
-        $ret = $uploadModel->delete($id);
+        $ret = $uploadModel->deleteById($id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
         }

@@ -62,11 +62,11 @@ class Controller_Article extends Controller_Website {
     public function action_edit() {
         $id = Arr::get($_GET, 'id');
         $m_article = Model::factory('article');
-        $info = $m_article->getRow($id);
+        $info = $m_article->getRowById($id);
 
         if (!empty($_POST)) {
             $data = $this->_get_data($_POST);
-            $ret = $m_article->update($data, $id);
+            $ret = $m_article->updateById($data, $id);
             if ($ret !== false) {
                 $this->redirect('article/list');
             }
@@ -85,7 +85,7 @@ class Controller_Article extends Controller_Website {
     public function action_del() {
         $id = $_GET['id'];
         $m_article = Model::factory('article');
-        $ret = $m_article->delete($id);
+        $ret = $m_article->deleteById($id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
         }
@@ -97,7 +97,7 @@ class Controller_Article extends Controller_Website {
             'status' => 'close',
         );
         $m_article = Model::factory('article');
-        $ret = $m_article->update($data, $id);
+        $ret = $m_article->updateById($data, $id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
         }
@@ -109,7 +109,7 @@ class Controller_Article extends Controller_Website {
             'status' => 'open',
         );
         $m_article = Model::factory('article');
-        $ret = $m_article->update($data, $id);
+        $ret = $m_article->updateById($data, $id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
         }

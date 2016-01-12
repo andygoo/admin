@@ -123,14 +123,14 @@ class Controller_Upload extends Controller_Website {
     public function action_del() {
         $id = Arr::get($_GET, 'id');
         $uploadModel = Model::factory('upload');
-        $info = $uploadModel->getRow($id);
+        $info = $uploadModel->getRowById($id);
 
         $file_path = $info['file_path'];
         if (file_exists($file_path)) {
             unlink($file_path);
         }
     
-        $ret = $uploadModel->delete($id);
+        $ret = $uploadModel->deleteById($id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
         }

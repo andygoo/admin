@@ -57,7 +57,7 @@ class Controller_Category extends Controller_Website {
         
         if (!empty($_POST)) {
             $data = $this->_get_data($_POST);
-            $ret = $m_category->update($data, $id);
+            $ret = $m_category->updateById($data, $id);
             if ($ret !== false) {
                 $this->redirect('category/list');
             }
@@ -66,7 +66,7 @@ class Controller_Category extends Controller_Website {
         $cat_list = $m_category->getAll(array('status'=>'open'))->as_array('id');
         $cat_tree = Category::get_children_tree($cat_list);
         
-        $info = $m_category->getRow($id);
+        $info = $m_category->getRowById($id);
         
         $this->content = View::factory('category_edit');
         $this->content->cat_list = $cat_list;
