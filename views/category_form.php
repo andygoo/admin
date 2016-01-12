@@ -40,16 +40,18 @@ function option($items, $parent_id, $cat_id, $level=0) {
 	<div class="form-group">
 		<label class="col-sm-1 control-label">状态</label>
 		<div class="col-sm-3">
-			<select name="status" class="form-control">
-				<option value="open" <?php if ($info['status'] == 'open') echo 'selected';?>>open</option>
-				<option value="close" <?php if ($info['status'] == 'close') echo 'selected';?>>close</option>
-			</select>
+			<label class="radio-inline">
+                <input type="radio" name="status" value="open" checked> 正常
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="status" value="close" <?php if ($info['status'] == 'close') echo 'checked';?>> 关闭
+            </label>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<div class="col-sm-offset-1 col-sm-3">
-			<button type="submit" class="btn btn-primary">提交</button>
+			<button type="submit" class="btn btn-info">提交</button>
 		</div>
 	</div>
 </form>
