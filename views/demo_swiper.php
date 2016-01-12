@@ -13,7 +13,7 @@ $list = array(
 );
 ?>
 
-<div class="swiper-container" id="swiper1">
+<div class="swiper-container" id="swiper1" style="width:600px">
     <div class="swiper-wrapper">
         <?php foreach($list as $item): ?>
         <div class="swiper-slide"><img src="<?= $item['pic']?>" width="100%"></div>

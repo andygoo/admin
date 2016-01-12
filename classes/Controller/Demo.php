@@ -5,6 +5,9 @@ class Controller_Demo extends Controller_Website {
     public function action_swiper() {
         $this->content = View::factory('demo_swiper');
     }
-    
+
+    public function action_plyr() {
+        $this->content = View::factory('demo_plyr');
+    }
 }
 
