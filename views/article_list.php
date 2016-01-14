@@ -13,9 +13,8 @@ function option($items, $cat_id, $level=0) {
 }
 ?>
 
-<h3 class="page-header">文章列表 <small>
-<a href="<?= URL::site('article/add');?>">
-<i class="glyphicon glyphicon-plus"></i></a></small>
+<h3 class="page-header">文章列表 
+<a href="<?= URL::site('article/add');?>">+</a>
 </h3>
 
 <form class="form-inline" method="get">

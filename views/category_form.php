@@ -15,43 +15,32 @@ function option($items, $parent_id, $cat_id, $level=0) {
 }
 ?>
 
-<form action="" method="post" class="form-horizontal">
+<form action="" method="post" class="col-xs-7 col-sm-6 col-md-5 col-lg-4">
 	<div class="form-group">
-		<label class="col-sm-1 control-label">上级</label>
-		<div class="col-sm-3">
-			<select class="form-control" name="parent_id">
-				<option value="0"> - </option>
-				<?php if(Arr::get($_GET, 'pid')):?>
-				<?php option($cat_tree, Arr::get($_GET, 'pid'), 0);?>
-				<?php else:?>
-				<?php option($cat_tree, $info['parent_id'], $info['id']);?>
-				<?php endif;?>
-			</select>
-		</div>
+		<select class="form-control" name="parent_id">
+			<option value="0"> -选择上级分类- </option>
+			<?php if(Arr::get($_GET, 'pid')):?>
+			<?php option($cat_tree, Arr::get($_GET, 'pid'), 0);?>
+			<?php else:?>
+			<?php option($cat_tree, $info['parent_id'], $info['id']);?>
+			<?php endif;?>
+		</select>
 	</div>
 
 	<div class="form-group">
-		<label class="col-sm-1 control-label">名称</label>
-		<div class="col-sm-3">
-			<input type="text" class="form-control" name="name" value="<?= $info['name'] ?>">
-		</div>
+		<input type="text" class="form-control" name="name" placeholder="名称" value="<?= $info['name'] ?>">
 	</div>
 
 	<div class="form-group">
-		<label class="col-sm-1 control-label">状态</label>
-		<div class="col-sm-3">
-			<label class="radio-inline">
-                <input type="radio" name="status" value="open" checked> 正常
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="status" value="close" <?php if ($info['status'] == 'close') echo 'checked';?>> 关闭
-            </label>
-		</div>
+		<label class="radio-inline">
+            <input type="radio" name="status" value="open" checked> 正常
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="status" value="close" <?php if ($info['status'] == 'close') echo 'checked';?>> 关闭
+        </label>
 	</div>
 
 	<div class="form-group">
-		<div class="col-sm-offset-1 col-sm-3">
-			<button type="submit" class="btn btn-info">提交</button>
-		</div>
+		<button type="submit" class="btn btn-info">提交</button>
 	</div>
 </form>
