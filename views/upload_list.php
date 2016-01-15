@@ -36,7 +36,7 @@
 	<td><?= $item['img_width'] ?> x <?= $item['img_height'] ?> px</td>
 	<td><?= date('Y-m-d H:i:s', $item['add_time']) ?></td>
 	<td>
-	    <a href="<?= URL::site('upload/del')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-del">删除</a>
+	    <a href="<?= URL::site('upload/del')?>?id=<?= $item['id'] ?>" onclick="return confirm('确定删除这条记录吗？')" class="btn btn-info btn-xs ajax-del">删除</a>
 	</td>
 </tr>
 <?php endforeach; ?>
