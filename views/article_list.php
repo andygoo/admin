@@ -14,10 +14,10 @@ function option($items, $cat_id, $level=0) {
 ?>
 
 <h3 class="page-header">文章列表 
-<a href="<?= URL::site('article/add');?>">+</a>
+<a href="<?= URL::site('article/add');?>" class="ajax-click">+</a>
 </h3>
 
-<form class="form-inline" method="get">
+<form class="form-inline ajax-submit" method="get">
     <div class="form-group">
         <select class="form-control" name="cid">
 			<option value="">选择分类</option>
@@ -58,19 +58,13 @@ function option($items, $cat_id, $level=0) {
             <p class="text-muted"><?= Text::limit_chars($item['brief'],80) ?></p>
             
             <?php if ($item['status']=='open'):?>
-            <a href="<?= URL::site('article/close?id='.$item['id']);?>" class="btn btn-info btn-xs">关闭</a>
+            <a href="<?= URL::site('article/close?id='.$item['id']);?>" class="btn btn-info btn-xs ajax-update">关闭</a>
             <?php else:?>
-            <a href="<?= URL::site('article/open?id='.$item['id']);?>" class="btn btn-danger btn-xs">发布</a>
+            <a href="<?= URL::site('article/open?id='.$item['id']);?>" class="btn btn-danger btn-xs ajax-update">发布</a>
             <?php endif;?>
             
-            <?php if ($item['featured']):?>
-            <a href="#<?= URL::site('article/disable?id='.$item['id']);?>" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-star"></i> 取消</a>
-            <?php else:?>
-            <a href="#<?= URL::site('article/enable?id='.$item['id']);?>" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-star-empty"></i> 推荐</a>
-            <?php endif;?>
-            
-    	    <a href="<?= URL::site('article/edit')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs">修改</a>
-    		<a href="<?= URL::site('article/del')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs" onclick="return confirm('确定删除这条记录吗？')">删除</a>
+    	    <a href="<?= URL::site('article/edit')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-click">修改</a>
+    		<a href="<?= URL::site('article/del')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-del" onclick="return confirm('确定删除这条记录吗？')">删除</a>
         </div>
     </li>
 <?php endforeach; ?>

@@ -13,7 +13,7 @@ function option($items, $cat_id, $level=0) {
 }
 ?>
 
-<form action="" method="post" class="form-horizontal">
+<form action="" method="post" class="form-horizontal ajax-submit">
 	<div class="form-group">
 		<label class="col-sm-1 control-label">文章分类</label>
 		<div class="col-sm-3">
