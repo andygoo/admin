@@ -29,6 +29,7 @@
     <?php $img_width = $item['img_width'] > 1600 ? 1600 : $item['img_width'];?>
     <a class="swipe" href="<?= URL::site('imagefly/w'.$img_width.'/'.$item['file_src']) ?>" data-size="<?= $item['img_width'] ?>x<?= $item['img_height'] ?>">
         <img src="<?= URL::site('imagefly/w120/'.$item['file_src']) ?>" width="80">
+        <figure style="display: none;">This is dummy caption.</figure>
     </a>
 	</td>
 	<td><?= strtoupper($item['file_type']) ?></td>
