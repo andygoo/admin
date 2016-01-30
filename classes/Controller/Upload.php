@@ -75,7 +75,7 @@ class Controller_Upload extends Controller_Website {
     
         $m_upload = Model::factory('upload');
         $total = $m_upload->count($where);
-        $pager = new Pager($total, 20);
+        $pager = new Pager($total, 15);
         $list = $m_upload->select($pager->offset, $pager->size, $where)->as_array();
     
         $this->content = View::factory('upload_pics');
