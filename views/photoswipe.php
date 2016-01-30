@@ -124,7 +124,8 @@
 		    var eTarget = e.target || e.srcElement;
 
 		    var clickedListItem = closest(eTarget, function(el) {
-		        return el.className === 'swipe';
+		        //return el.className === 'swipe';
+		        return $(el).hasClass('swipe');
 		    });
 
 		    if(!clickedListItem) {
@@ -133,7 +134,8 @@
 
 		    //var clickedGallery = clickedListItem.parentNode;
 			var clickedGallery = closest(clickedListItem, function(el) {
-		        return '.'+el.className === gallerySelector || '#'+el.id === gallerySelector;
+		        //return '.'+el.className === gallerySelector || '#'+el.id === gallerySelector;
+		        return $(el).hasClass(gallerySelector.replace('.', '')) || '#'+el.id === gallerySelector;
 		    });
 		    
 		    //var childNodes = clickedGallery.childNodes,
