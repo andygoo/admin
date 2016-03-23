@@ -116,15 +116,8 @@ class Controller_Article extends Controller_Website {
     }
 
     protected function _get_data($post) {
-        $data = array();
-
-        $data['cid'] = $post['cid'];
-        $data['title'] = $post['title'];
-        $data['brief'] = $post['brief'];
-        $data['pic'] = $post['pic'];
-        $data['content'] = $post['content'];
+        $data = array_intersect_key($post, array_flip(array('cid','title','brief','pic','content')));
         $data['edit_time'] = strtotime('now');
-
         return $data;
     }
     

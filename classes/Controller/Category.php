@@ -84,13 +84,7 @@ class Controller_Category extends Controller_Website {
     }
 
     protected function _get_data($post) {
-        $data = array();
-
-        $data['parent_id'] = Arr::get($post, 'parent_id');
-        $data['name'] = Arr::get($post, 'name');
-        $data['status'] = Arr::get($post, 'status');
-        
-        return $data;
+        return array_intersect_key($post, array_flip(array('parent_id','name','status')));
     }
     
 }
