@@ -3,6 +3,7 @@
 require APPPATH . 'vendor/qiniu/autoload.php';
 
 use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
 
 class Controller_Qiniu extends Controller_Website {
 
@@ -59,6 +60,23 @@ class Controller_Qiniu extends Controller_Website {
         $ret = $uploadModel->deleteById($id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
+        }
+    }
+    
+    protected function _del($key) {
+        $qiniu_config = Kohana::config('qiniu.default');
+        $accessKey = $qiniu_config['access_key'];
+        $secretKey = $qiniu_config['secret_key'];
+    
+        $bucket = 'jiesc-net';
+        $auth = new Auth($accessKey, $secretKey);
+        
+        $bucketMgr = new BucketManager($auth);
+        $err = $bucketMgr->delete($bucket, $key);
+        if ($err === null) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
