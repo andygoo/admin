@@ -9,5 +9,9 @@ class Controller_Demo extends Controller_Website {
     public function action_plyr() {
         $this->content = View::factory('demo_plyr');
     }
+    
+    public function action_chart() {
+        $this->content = View::factory('demo_chart');
+    }
 }
 

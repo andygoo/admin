@@ -48,7 +48,7 @@ $list2 = array(
 <div class="swiper-container gallery-thumbs" style="width:400px; margin-top:3px">
     <div class="swiper-wrapper">
         <?php foreach($list2 as $pic): ?>
-        <div class="swiper-slide" style="width:120px">
+        <div class="swiper-slide" style="width:100px">
             <img src="<?= $pic?>?imageView2/1/w/280/h/210" width="100%">
         </div>
         <?php endforeach;?>
