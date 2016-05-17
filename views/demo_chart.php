@@ -7,6 +7,9 @@
 <script>
 $(function () {
     $('#container1').highcharts({
+    	credits: {
+            enabled: false
+        },
         title: {
             text: 'Monthly Average Temperature',
             x: -20 //center
@@ -53,6 +56,9 @@ $(function () {
     });
 
     $('#container2').highcharts({
+    	credits: {
+            enabled: false
+        },
         chart: {
             type: 'column'
         },
@@ -103,6 +109,9 @@ $(function () {
 
     // Build the chart
     $('#container3').highcharts({
+    	credits: {
+            enabled: false
+        },
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
