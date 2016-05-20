@@ -7,18 +7,14 @@ class Controller_Category extends Controller_Website {
         
         $where = array();
         $where['ORDER'] = 'id ASC';
-        $total = $m_category->count();
-        $pager = new Pager($total, 20);
-        $list = $m_category->select($pager->offset, $pager->size, $where)->as_array();
-
-        $cat_list = $m_category->getAll()->as_array('id', 'name');
+        $list = $m_category->getAll($where)->as_array();
+        $cat_list = array_column($list, 'name', 'id');
         foreach ($list as &$item) {
             $item['parent_name'] = isset($cat_list[$item['parent_id']]) ? $cat_list[$item['parent_id']] : '';
         }
         
         $this->content = View::factory('category_list');
         $this->content->list = $list;
-        $this->content->pager = $pager;
     }
     
     public function action_tree() {
