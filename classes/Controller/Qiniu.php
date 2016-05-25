@@ -7,6 +7,18 @@ use Qiniu\Storage\BucketManager;
 
 class Controller_Qiniu extends Controller_Website {
 
+    public function action_uptoken_hc51() {
+        $qiniu_config = Kohana::config('qiniu.haoche51');
+        $accessKey = $qiniu_config['access_key'];
+        $secretKey = $qiniu_config['secret_key'];
+    
+        $bucket = 'haoche51post';
+        $auth = new Auth($accessKey, $secretKey);
+        $token = $auth->uploadToken($bucket);
+        echo json_encode(array('uptoken'=>$token));
+        exit;
+    }
+    
     public function action_uptoken() {
         $qiniu_config = Kohana::config('qiniu.default');
         $accessKey = $qiniu_config['access_key'];
@@ -28,6 +40,19 @@ class Controller_Qiniu extends Controller_Website {
         $list = $m_upload->select($pager->offset, $pager->size, $where)->as_array();
         
         $this->content = View::factory('upload_qiniu');
+        $this->content->list = $list;
+        $this->content->pager = $pager;
+    }
+
+    public function action_upload_hc51() {
+        $where = array();
+        $where['ORDER'] = 'id DESC';
+        $m_upload = Model::factory('upload_qiniu');
+        $total = $m_upload->count($where);
+        $pager = new Pager($total, 10);
+        $list = $m_upload->select($pager->offset, $pager->size, $where)->as_array();
+    
+        $this->content = View::factory('upload_qiniu_hc51');
         $this->content->list = $list;
         $this->content->pager = $pager;
     }
