@@ -1,6 +1,4 @@
 
-<?= HTML::script('media/js/Sortable.min.js')?>
-
 <h3 class="page-header">类别列表 
 <a href="<?= URL::site('category/add');?>" class="ajax-modal-sm">+</a>
 </h3>
@@ -32,8 +30,3 @@
 </tbody>
 </table>
 </div>
-
-<script>
-var list = document.getElementById("cat-list");
-Sortable.create(list, {handle: ".drag-handle",});
-</script>
