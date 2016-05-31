@@ -2,8 +2,14 @@
 <h3 class="page-header">七牛上传文件</h3>
 
 <div id="container">
-    <button id="pickfiles" class="btn btn-default">选择文件</button>
-    <button id="uploadBtn" class="btn btn-info">上传</button>
+    <button id="pickfiles" class="btn btn-default pull-left" style="margin-right: 10px;">选择文件</button>
+
+    <div class="input-group" style="width: 250px;">
+        <input type="text" class="form-control" id="prefix" placeholder="上传路径">
+        <span class="input-group-btn">
+            <button id="uploadBtn" class="btn btn-info">上传</button>
+        </span>
+    </div>
 </div>
 
 <div id="fsUploadProgress" class="row" style="margin: 10px 0;">
@@ -122,12 +128,17 @@ $(function() {
             'Error': function(up, err, errTip) {
             },
             'Key': function(up, file) {
-            	var file_type = file.name.substr(file.name.lastIndexOf(".")).toLowerCase();
-            	var date = format_time(new Date(), 'yyyy/MM/dd');
-            	var time = new Date().getTime();
-            	var random = Math.floor(Math.random()*9);
-                var key = date+'/'+time+random+file_type; 
-                return key;
+                var prefix = $.trim($('#prefix').val());
+                if (prefix != '') {
+                    return prefix + file.name;
+                } else {
+                	var file_type = file.name.substr(file.name.lastIndexOf(".")).toLowerCase();
+                	var date = format_time(new Date(), 'yyyy/MM/dd');
+                	var time = new Date().getTime();
+                	var random = Math.floor(Math.random()*9);
+                    var key = date+'/'+time+random+file_type; 
+                    return key;
+                }
             }
         }
     });
