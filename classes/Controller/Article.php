@@ -13,11 +13,11 @@ class Controller_Article extends Controller_Website {
         $cid = Arr::get($_GET, 'cid', 0) ?: 0;
         $ids = Category::get_children_ids($cat_list, $cid);
         array_push($ids, $cid);
-        $where['cid'] = $ids;
+        $where['cid'] = array('in'=>$ids);
         
         $title = Arr::get($_GET, 'title');
         if (!empty($title)) {
-            $where['title|LIKE'] = "%$title%";
+            $where['title'] = array('like'=>"%$title%");
         }
         $where['status'] = Arr::get($_GET, 'status');
         $where = array_filter($where);

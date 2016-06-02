@@ -88,7 +88,7 @@ class Controller_Upload extends Controller_Website {
         $where['ORDER'] = 'id DESC';
         $q = Arr::get($_GET, 'q', '');
         if (!empty($q)) {
-            $where['file_src|LIKE'] = "$q%";
+            $where['file_src'] = array('like'=>"%$q%");
         }
     
         $m_upload = Model::factory('upload');
