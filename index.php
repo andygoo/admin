@@ -34,6 +34,7 @@ Kohana::modules(array(
 	'imagefly'   => MODPATH.'imagefly',
 	'captcha'    => MODPATH.'captcha',
 	'admin'      => MODPATH.'admin',
+	'auth'       => MODPATH.'auth',
 	'devtools'   => MODPATH.'devtools',
 	'logreader'  => MODPATH.'logreader',
 	'myadmin'    => MODPATH.'myadmin',
