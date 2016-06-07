@@ -64,7 +64,6 @@ function option($items, $cat_id, $level=0) {
             <?php endif;?>
             
     	    <a href="<?= URL::site('article/edit')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-click">修改</a>
-    		<a href="<?= URL::site('article/del')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-del" onclick="return confirm('确定删除这条记录吗？')">删除</a>
         </div>
     </li>
 <?php endforeach; ?>

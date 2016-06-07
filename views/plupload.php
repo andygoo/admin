@@ -9,7 +9,7 @@ function FileProgress(file, targetID) {
     if (!this.fileProgressWrapper.length) {
 		var html = '<div class="up-item" id="' + file.id +'">';
 			html += '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-			html += '<img class="img-thumbnail" src="">';
+			html += '<img class="img-thumbnail" src=""><input type="hidden" class="form-control" name="pic[]" value="">';
 	    	html += '<div class="progress"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div>';
 			html += '</div>';
 		this.fileProgressWrapper = $(html);
@@ -27,7 +27,7 @@ FileProgress.prototype.setProgress = function(percentage) {
 };
 FileProgress.prototype.setComplete = function(up, file, info) {
     this.fileProgressWrapper.find('.progress').hide();
-    this.fileProgressWrapper.find('.close').hide();
+    //this.fileProgressWrapper.find('.close').hide();
 };
 
 function previewImage(file,callback) {
