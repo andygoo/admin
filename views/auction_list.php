@@ -9,16 +9,24 @@
         <div class="media-left">
     	    <?php $pics = json_decode($item['pic'], true); $pic = $pics[0];?>
             <?php if (strpos($pic, '://') !== false):?>
-                <?= HTML::image($pic.'?imageView2/2/w/160/h/120', array('width'=>160)) ?>
+                <?= HTML::image($pic.'?imageView2/2/w/200/h/200', array('width'=>120)) ?>
             <?php else:?>
-                <?= HTML::image('/imagefly/w200-h150-c/' . $pic, array('width'=>160)) ?>
+                <?= HTML::image('/imagefly/w200-h200-c/' . $pic, array('width'=>120)) ?>
             <?php endif;?>
         </div>
         <div class="media-body">
-        	<h4 class="media-heading"><a href="#"><?= date('Y/m/d H:i', $item['start_time']) ?>-<?= date('H:i', $item['end_time']) ?></a></h4>
-        	<div class="text-muted">起 <?= $item['start_price'] ?> 加 <?= $item['step_price'] ?> 底 <?= $item['reserve_price'] ?> 图 <?php echo count($pics)?></div>
-        	
-        	<p class="text-muted"><?= str_replace("\n", '，', $item['desc']) ?></p>
+        	<h3 class="media-heading text-muted" style="font-size:14px;line-height: 20px;text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+        	    <?= str_replace("\n", '&nbsp;&nbsp;', $item['desc']) ?>
+        	</h3>
+        	<div class="text-muted">
+            	起拍：<span class="text-primary"><?= $item['start_price'] ?>元</span>&nbsp;&nbsp;
+            	加价：<span class="text-primary"><?= $item['step_price'] ?>元</span>&nbsp;&nbsp;
+            	底价：<span class="text-primary"><?= $item['reserve_price'] ?>元</span>&nbsp;&nbsp;
+            	图片：<span class="text-primary"><?php echo count($pics)?>张</span>
+        	</div>
+        	<p class="text-muted">
+                                               时间：<span class="text-primary"><?= date('Y/m/d H:i', $item['start_time']) ?>-<?= date('H:i', $item['end_time']) ?></span>
+        	</p>
         	
     	    <a href="<?= URL::site('auction/edit')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-click">修改</a>&nbsp;&nbsp;
             <?php if ($item['status']=='1'):?>

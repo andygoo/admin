@@ -169,7 +169,7 @@ class Controller_Upload extends Controller_Website {
         $uploadModel = Model::factory('upload');
         $ret = $uploadModel->insert($data);
         if($ret !== false) {
-            return $file_src;
+            return $file_src . '?' . $width . 'x' . $height;
         } else {
             return false;
         }

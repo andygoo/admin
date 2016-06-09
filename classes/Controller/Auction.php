@@ -84,7 +84,7 @@ class Controller_Auction extends Controller_Website {
     protected function _get_data($post) {
         $data = array();
         $data['start_time'] = strtotime($post['start_date'] . ' ' . $post['start_time']);
-        $data['end_time'] = strtotime($post['start_date'] . ' ' . $post['end_time']);
+        $data['end_time'] = strtotime($post['end_date'] . ' ' . $post['end_time']);
         $data['start_price'] = $post['start_price'];
         $data['step_price'] = $post['step_price'];
         $data['reserve_price'] = $post['reserve_price'];
