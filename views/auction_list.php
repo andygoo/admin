@@ -19,13 +19,14 @@
         	    <?= str_replace("\n", '&nbsp;&nbsp;', $item['desc']) ?>
         	</h3>
         	<div class="text-muted">
-            	起拍：<span class="text-primary"><?= $item['start_price'] ?>元</span>&nbsp;&nbsp;
-            	加价：<span class="text-primary"><?= $item['step_price'] ?>元</span>&nbsp;&nbsp;
+            	起拍价：<span class="text-primary"><?= $item['start_price'] ?>元</span>&nbsp;&nbsp;
+            	加价幅度：<span class="text-primary"><?= $item['step_price'] ?>元</span>&nbsp;&nbsp;
             	底价：<span class="text-primary"><?= $item['reserve_price'] ?>元</span>&nbsp;&nbsp;
+            	当前价：<span class="text-primary"><?= $item['curr_price'] ?>元</span>&nbsp;&nbsp;
             	图片：<span class="text-primary"><?php echo count($pics)?>张</span>
         	</div>
         	<p class="text-muted">
-                                               时间：<span class="text-primary"><?= date('Y/m/d H:i', $item['start_time']) ?>-<?= date('H:i', $item['end_time']) ?></span>
+                                               时间：<span class="text-primary"><?= date('Y/m/d H:i', $item['start_time']) ?> - <?= date('Y/m/d H:i', $item['end_time']) ?></span>
         	</p>
         	
     	    <a href="<?= URL::site('auction/edit')?>?id=<?= $item['id'] ?>" class="btn btn-info btn-xs ajax-click">修改</a>&nbsp;&nbsp;
