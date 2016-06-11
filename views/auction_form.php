@@ -94,12 +94,12 @@
 <script>
 $(function () {
     var picker1 = new Pikaday({
-        field: document.getElementById('start_date'),
-        minDate: new Date('<?php echo date('Y-m-d')?>')
+        field: document.getElementById('start_date')
+        //minDate: new Date('<?php echo date('Y-m-d')?>')
     });
     var picker2 = new Pikaday({
-        field: document.getElementById('end_date'),
-        minDate: new Date('<?php echo date('Y-m-d')?>')
+        field: document.getElementById('end_date')
+        //minDate: new Date('<?php echo date('Y-m-d')?>')
     });
     $('.clockpicker').clockpicker({
         //autoclose: true
