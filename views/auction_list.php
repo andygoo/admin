@@ -1,4 +1,23 @@
 
+<style>
+.max-line1 {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.max-line2 {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+</style>
+
 <h3 class="page-header">拍品列表 
 <a href="<?= URL::site('auction/add');?>" class="ajax-click">+</a>
 </h3>
@@ -15,7 +34,7 @@
             <?php endif;?>
         </div>
         <div class="media-body">
-        	<h3 class="media-heading text-muted" style="font-size:14px;line-height: 20px;text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+        	<h3 class="media-heading text-muted max-line2" style="font-size:14px;line-height: 20px;">
         	    <?= str_replace("\n", '&nbsp;&nbsp;', $item['desc']) ?>
         	</h3>
         	<div class="text-muted">

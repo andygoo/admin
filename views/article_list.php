@@ -12,6 +12,21 @@ function option($items, $cat_id, $level=0) {
     }
 }
 ?>
+<style>
+.max-line1 {
+	width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.max-line2 {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+</style>
 
 <h3 class="page-header">文章列表 
 <a href="<?= URL::site('article/add');?>" class="ajax-click">+</a>
@@ -47,15 +62,15 @@ function option($items, $cat_id, $level=0) {
     <li class="media">
         <div class="media-left">
             <?php if (strpos($item['pic'], '://') !== false):?>
-            <?= HTML::image($item['pic'].'?imageView2/2/w/160/h/120', array('width'=>160)) ?>
+            <?= HTML::image($item['pic'].'?imageView2/2/w/160/h/120') ?>
             <?php else:?>
-            <?= HTML::image('/imagefly/w200-h150-c/' . $item['pic'], array('width'=>160)) ?>
+            <?= HTML::image('/imagefly/w160-h120-c/' . $item['pic']) ?>
             <?php endif;?>
         </div>
         <div class="media-body">
             <h4 class="media-heading"><a href="http://haoche.com<?= URL::site('article?id='.$item['id'])?>" target="_blank"><?= $item['title'] ?></a></h4>
-            <div class="text-muted"><?= date('Y-m-d H:i:s', $item['add_time']) ?>  &bull; <?= $item['cat_name'] ?></div>
-            <p class="text-muted"><?= Text::limit_chars($item['brief'],80) ?></p>
+            <div class="text-muted max-line1"><?= date('Y-m-d H:i:s', $item['add_time']) ?>  &bull; <?= $item['cat_name'] ?></div>
+            <p class="text-muted max-line2"><?= Text::limit_chars($item['brief'],80) ?></p>
             
             <?php if ($item['status']=='open'):?>
             <a href="<?= URL::site('article/close?id='.$item['id']);?>" class="btn btn-info btn-xs ajax-update">关闭</a>

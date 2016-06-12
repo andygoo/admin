@@ -9,6 +9,7 @@
 <div id="fsUploadProgress" class="row" style="margin: 10px 0;">
 </div>
 
+<div class="table-responsive">
 <table class="table table-hover table-bordered">
 <thead>
 <tr>
@@ -43,6 +44,7 @@
 <?php endforeach; ?>
 </tbody>
 </table>
+</div>
 
 <?= $pager ?>
 
