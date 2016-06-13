@@ -6,9 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>好车无忧管理后台</title>
 <?= HTML::style('media/bootstrap/css/bootstrap.min.css')?>
+<?= HTML::style('media/font-awesome/css/font-awesome.min.css')?>
 <?= HTML::style('media/css/AdminLTE.min.css')?>
 <?= HTML::style('media/css/skins/skin-blue.min.css')?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
 <?= HTML::script('media/js/jquery.min.js')?>
 <?= HTML::script('media/bootstrap/js/bootstrap.min.js')?>
 <?= HTML::script('media/js/highcharts.js')?>
@@ -16,7 +17,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <header class="main-header">
-    <a href="<?= URL::site()?>" class="logo">
+    <a href="<?= URL::site()?>" class="logo ajax-click">
       <span class="logo-mini"><i class="glyphicon glyphicon-home"></i></span>
       <span class="logo-lg"><i class="glyphicon glyphicon-home"></i>&nbsp;好车无忧管理后台</span>
     </a>
@@ -88,6 +89,10 @@
 <script>
 $(function(){
 	$('.treeview-menu li.curr').parents('.treeview').attr('class', 'treeview active');
+	$(document).on('click', '.treeview-menu .ajax-click', function() {
+		$('body').removeClass('sidebar-open');
+	});
+	
 	var currentState = {
         url: document.location.href,
         title: document.title,
