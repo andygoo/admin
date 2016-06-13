@@ -9,6 +9,12 @@
 <?= HTML::style('media/font-awesome/css/font-awesome.min.css')?>
 <?= HTML::style('media/css/AdminLTE.min.css')?>
 <?= HTML::style('media/css/skins/skin-blue.min.css')?>
+<style>
+@media (max-width: 767px){
+.skin-blue .main-header .navbar .dropdown-menu li a{color: #555}
+.skin-blue .main-header .navbar .dropdown-menu li a:hover{color: #fff}
+}
+</style>
 
 <?= HTML::script('media/js/jquery.min.js')?>
 <?= HTML::script('media/bootstrap/js/bootstrap.min.js')?>
@@ -19,7 +25,7 @@
   <header class="main-header">
     <a href="<?= URL::site()?>" class="logo ajax-click">
       <span class="logo-mini"><i class="glyphicon glyphicon-home"></i></span>
-      <span class="logo-lg"><i class="glyphicon glyphicon-home"></i>&nbsp;好车无忧管理后台</span>
+      <span class="logo-lg"><i class="glyphicon glyphicon-home"></i>&nbsp;好车无忧</span>
     </a>
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
