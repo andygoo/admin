@@ -125,7 +125,7 @@ div.mce-fullscreen {z-index: 9999;}
 .up-item .img-thumbnail{width:160px;}
 .up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
 </style>
-<?php include Kohana::find_file('views', 'plupload');?>
+<?php include __DIR__ . '/plupload.php';?>
 
 <script>
 $(function() {

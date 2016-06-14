@@ -43,7 +43,7 @@ abbr[data-original-title],abbr[title] {
         </div>
             
         <div id="fsUploadProgress">
-            <?php include Kohana::find_file('views', 'upload_grid_increment');?>
+            <?php include __DIR__ . '/upload_grid_increment.php';?>
         </div>
         
         <div style="clear:both"></div>
@@ -63,7 +63,7 @@ abbr[data-original-title],abbr[title] {
 .up-item .img-thumbnail, .up-files .img-thumbnail{width:120px;height:90px;}
 .up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
 </style>
-<?php include Kohana::find_file('views', 'plupload');?>
+<?php include __DIR__ . '/plupload.php';?>
 <script>
 $(function() {
 	var uploader = new plupload.Uploader({

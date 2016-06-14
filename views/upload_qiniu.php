@@ -43,7 +43,7 @@
 </table>
 <?= $pager ?>
 
-<?php include Kohana::find_file('views', 'photoswipe');?>
+<?php include __DIR__ . '/photoswipe.php';?>
 
 <style>
 .up-item{float:left;width:160px;margin:5px;position:relative}
@@ -51,7 +51,7 @@
 .up-item .img-thumbnail{width:160px;}
 .up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
 </style>
-<?php include Kohana::find_file('views', 'plupload');?>
+<?php include __DIR__ . '/plupload.php';?>
 
 <?= HTML::script('media/js/qiniu.js')?>
 <script>

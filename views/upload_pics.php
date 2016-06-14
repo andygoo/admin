@@ -44,4 +44,4 @@ var showPhotos = function(photos) {
 }
 </script>
 
-<?php include Kohana::find_file('views', 'photoswipe');?>
+<?php include __DIR__ . '/photoswipe.php';?>
