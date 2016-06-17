@@ -35,11 +35,11 @@
 	</div>
 	
 	<div class="form-group">
-		<label class="col-sm-1 control-label">开始</label>
-		<div class="col-sm-2">
+		<label class="col-xs-12 col-sm-1 control-label">开始</label>
+		<div class="col-xs-4 col-sm-2">
 	        <input type="text" class="form-control" name="start_date" id="start_date" value="<?= date('Y-m-d', $info['start_time'])?>" placeholder="开拍日期" required>
     	</div>
-    	<div class="col-sm-2">
+    	<div class="col-xs-5 col-sm-2">
     		<div class="input-group clockpicker">
     	        <input type="text" class="form-control" name="start_time" value="<?= date('H:i', $info['start_time'])?>" placeholder="起拍时间" required>
     	        <span class="input-group-addon">
@@ -50,11 +50,11 @@
     </div>
     
 	<div class="form-group">
-		<label class="col-sm-1 control-label">结束</label>
-		<div class="col-sm-2">
+		<label class="col-xs-12 col-sm-1 control-label">结束</label>
+		<div class="col-xs-4 col-sm-2">
 	        <input type="text" class="form-control" name="end_date" id="end_date" value="<?= date('Y-m-d', $info['end_time'])?>" placeholder="截拍日期" required>
     	</div>
-    	<div class="col-sm-2">
+    	<div class="col-xs-5 col-sm-2">
     		<div class="input-group clockpicker">
     	        <input type="text" class="form-control" name="end_time" value="<?= date('H:i', $info['end_time'])?>" placeholder="截拍时间" required>
     	        <span class="input-group-addon">
@@ -65,14 +65,14 @@
     </div>
     
 	<div class="form-group">
-		<label class="col-sm-1 control-label">价格</label>
-		<div class="col-sm-2">
+		<label class="col-xs-12 col-sm-1 control-label">价格</label>
+		<div class="col-xs-4 col-sm-2">
 			<input type="text" class="form-control" name="start_price" value="<?= $info['start_price']?>" placeholder="起拍价" required>
 		</div>
-		<div class="col-sm-2">
+		<div class="col-xs-4 col-sm-2">
 			<input type="text" class="form-control" name="step_price" value="<?= $info['step_price']?>" placeholder="加幅" required>
 		</div>
-		<div class="col-sm-2">
+		<div class="col-xs-4 col-sm-2">
 			<input type="text" class="form-control" name="reserve_price" value="<?= $info['reserve_price']?>" placeholder="底价" required>
 		</div>
 	</div>
