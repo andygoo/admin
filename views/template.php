@@ -162,6 +162,8 @@ $(function(){
         t.find('.modal-title').html(page_title.text());
         t.find('form').attr('class', 'ajax-submit');
         page_title.hide();
+
+        currentState.html = $('#content').html();
 	});
 	$('.modal').on('hidden.bs.modal', function (e) {
 		if (modal_close_history_back) {

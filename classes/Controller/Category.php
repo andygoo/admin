@@ -34,7 +34,7 @@ class Controller_Category extends Controller_Website {
             $data = $this->_get_data($_POST);
             $ret = $m_category->insert($data);
             if ($ret !== false) {
-                $this->redirect('category/list');
+                $this->redirect('category/tree');
             }
         }
         
@@ -55,7 +55,7 @@ class Controller_Category extends Controller_Website {
             $data = $this->_get_data($_POST);
             $ret = $m_category->updateById($data, $id);
             if ($ret !== false) {
-                $this->redirect('category/list');
+                $this->redirect('category/tree');
             }
         }
 

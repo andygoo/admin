@@ -1,20 +1,26 @@
-<h3 class="page-header">类别列表</h3>
+<h3 class="page-header">类别列表
+<a href="<?= URL::site('category/add');?>" class="ajax-modal-sm">+</a>
+</h3>
 
 <style>
-#kodoc-topics ul{ list-style-type:none; margin: 0; padding: 0;}
-#kodoc-topics ul li { margin:0; padding: 0; margin-left: 1em;}
-#kodoc-topics ul li a { display: block; padding: 0; margin: 0; }
-#kodoc-topics ul li.active { font-weight: bold; }
-#kodoc-topics span { display: block; padding: 0; margin: 0; cursor: pointer; float:left}
-#kodoc-topics span.toggle { display: block; float: left; width: 1em; padding-right: 0.4em; margin-left: -1.4em; text-align: center; }
+#kodoc-topics ul{list-style-type:none; margin: 0; padding: 0;}
+#kodoc-topics ul li {margin:0; padding: 0; margin-left: 1em;border-top: 1px solid #ddd}
+#kodoc-topics span {display: inline-flex; padding: 10px 0; margin: 0; cursor: pointer;}
+#kodoc-topics span.toggle {float: left; padding-right: 0.4em; margin-left: -1.4em;}
 </style>
 
 <?php 
 function tree($items) {
     echo '<ul>';
     foreach ($items as $item) {
-        $url = URL::site('category/edit?id='.$item['id']);
-        echo '<li><span>'.$item['name'].'</span> <a href="'.$url.'">修改</a>';
+        $url1 = URL::site('category/edit?id='.$item['id']);
+        $url2 = URL::site('category/add?id='.$item['id']);
+        
+        echo '<li><span>'.$item['name'].'</span>';
+        echo '<div class="pull-right" style="margin-top: 10px">';
+        echo '<a href="'.$url1.'" class="btn btn-info btn-xs ajax-click _ajax-modal-sm">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+        echo '<a href="'.$url2.'" class="btn btn-info btn-xs ajax-click _ajax-modal-sm">+子类</a></div>';
+        
         if (isset($item['children']) && is_array($item['children'])) {
             tree($item['children']);
         }
@@ -25,7 +31,7 @@ function tree($items) {
 
 ?>
 
-<div id="kodoc-topics">
+<div id="kodoc-topics" style="max-width: 600px">
 <?php tree($cat_tree);?>
 </div>
 
@@ -35,22 +41,26 @@ $(function() {
 		var t = $(this);
 		var toggle = $('<span class="toggle"></span>');
 		var menu = t.find('>ul');
-		if(!t.is(':has(li.active)')) {
+		if(!t.hasClass('active')) {
 			menu.hide();
 		}
 	    toggle.click(function() {
 			if(menu.is(':visible')) {
 				menu.stop(true,true).slideUp('fast');
+				t.removeClass('active');
 				toggle.html(' + ');
 			} else {
 				menu.stop(true,true).slideDown('fast');
+				t.addClass('active');
 				toggle.html(' – ');
 			}
 		});
 		t.find('>span').click(function() {
 			toggle.click();
 		});
-		toggle.html(menu.is(':visible') ? ' – ' : ' + ').prependTo(t);
+		if(!t.find('.toggle').length) {
+		    toggle.html(menu.is(':visible') ? ' – ' : ' + ').prependTo(t);
+		}
 	});
 });
 </script>

@@ -15,7 +15,7 @@ function option($items, $parent_id, $cat_id, $level=0) {
 }
 ?>
 
-<form action="" method="post" class="col-sm-6 col-md-4">
+<form action="" method="post" class="col-sm-6 col-md-4 ajax-submit">
 	<div class="form-group">
 		<select class="form-control" name="parent_id">
 			<option value="0"> -选择上级分类- </option>
