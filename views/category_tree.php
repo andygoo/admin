@@ -17,7 +17,7 @@ function tree($items) {
         $url2 = URL::site('category/add?id='.$item['id']);
         
         echo '<li><span>'.$item['name'].'</span>';
-        echo '<div class="pull-right" style="margin-top: 10px">';
+        echo '<div class="pull-right" style="margin-top: 10px;_display: none">';
         echo '<a href="'.$url1.'" class="btn btn-info btn-xs ajax-click _ajax-modal-sm">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;';
         echo '<a href="'.$url2.'" class="btn btn-info btn-xs ajax-click _ajax-modal-sm">+子类</a></div>';
         
@@ -41,27 +41,27 @@ $(function() {
 		var t = $(this);
 		var toggle = $('<span class="toggle"></span>');
 		var menu = t.find('>ul');
-		if(!t.hasClass('active')) {
-			menu.hide();
-		}
+		menu.hide();
 	    toggle.click(function() {
 			if(menu.is(':visible')) {
 				menu.stop(true,true).slideUp('fast');
-				t.removeClass('active');
 				toggle.html(' + ');
 			} else {
 				menu.stop(true,true).slideDown('fast');
-				t.addClass('active');
 				toggle.html(' – ');
 			}
 		});
 		t.find('>span').click(function() {
 			toggle.click();
 		});
-		if(!t.find('.toggle').length) {
-		    toggle.html(menu.is(':visible') ? ' – ' : ' + ').prependTo(t);
-		}
+		toggle.html(menu.is(':visible') ? ' – ' : ' + ').prependTo(t);
 	});
+
+	$('#kodoc-topics li').hover(function(){
+	    //$(this).find(">.pull-right").show();
+    },function(){
+    	//$(this).find(">.pull-right").hide();
+    });
 });
 </script>
 
