@@ -14,7 +14,7 @@ function tree($items) {
     echo '<ul>';
     foreach ($items as $item) {
         $url1 = URL::site('category/edit?id='.$item['id']);
-        $url2 = URL::site('category/add?id='.$item['id']);
+        $url2 = URL::site('category/add?pid='.$item['id']);
         
         echo '<li><span>'.$item['name'].'</span>';
         echo '<div class="pull-right" style="margin-top: 10px;_display: none">';
