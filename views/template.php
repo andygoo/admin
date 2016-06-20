@@ -18,7 +18,9 @@
 
 <?= HTML::script('media/js/jquery.min.js')?>
 <?= HTML::script('media/bootstrap/js/bootstrap.min.js')?>
-<?= HTML::script('media/js/highcharts.js')?>
+<?= HTML::script('media/highcharts/highcharts.js')?>
+<?= HTML::script('media/highcharts/exporting.js')?>
+<?= HTML::script('media/highcharts/export-csv.js')?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
