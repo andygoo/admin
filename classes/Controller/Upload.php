@@ -139,7 +139,7 @@ class Controller_Upload extends Controller_Website {
     protected function _add($file) {
         $file_type = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $filename = strtotime('now').str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT) . '.' . $file_type;
-        $directory = realpath(APPPATH . '../upload');
+        $directory = realpath(APPPATH . '../data/upload');
         $sub_directory = date('Y/m/d');
         $sub_directory = str_replace('/', DIRECTORY_SEPARATOR, $sub_directory);
         $upload_dir = $directory.DIRECTORY_SEPARATOR.$sub_directory;
