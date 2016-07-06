@@ -7,8 +7,8 @@
 <title>好车无忧管理后台</title>
 <?= HTML::style('media/bootstrap/css/bootstrap.min.css')?>
 <?= HTML::style('media/font-awesome/css/font-awesome.min.css')?>
-<?= HTML::style('media/css/AdminLTE.min.css')?>
-<?= HTML::style('media/css/skins/skin-blue.min.css')?>
+<?= HTML::style('media/adminlte/AdminLTE.min.css')?>
+<?= HTML::style('media/adminlte/skins/skin-blue.min.css')?>
 <style>
 @media (max-width: 767px){
 .skin-blue .main-header .navbar .dropdown-menu li a{color: #555}
@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<?= HTML::script('media/js/app.min.js')?>
+<?= HTML::script('media/adminlte/app.min.js')?>
 <script>
 $(function(){
 	$('.treeview-menu li.curr').parents('.treeview').attr('class', 'treeview active');
