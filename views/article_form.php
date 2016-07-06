@@ -71,33 +71,9 @@ function option($items, $cat_id, $level=0) {
 	</div>
 </form>
 
-<!-- 
-<script>
-//dialogs/image/image.js; onlineImage.reset();
-window.UEDITOR_HOME_URL = '<?= URL::site('media/qiniu_ueditor_1.4.3')?>/';
-</script>
-<?= HTML::script('media/qiniu_ueditor_1.4.3/ueditor.config.js')?>
-<?= HTML::script('media/qiniu_ueditor_1.4.3/ueditor.all.min.js')?>
- -->
-
- 
-<!-- 
-<script>
-window.UEDITOR_HOME_URL = '<?= URL::site('media/ueditor_1.4.3')?>/';
-</script>
-<?= HTML::script('media/ueditor_1.4.3/ueditor.config.js')?>
-<?= HTML::script('media/ueditor_1.4.3/ueditor.all.min.js')?>
- -->
-
-<!-- 
-<script>
-var ue = UE.getEditor('editor',{
-	initialFrameHeight:420
-});
-</script>
- -->
-
-
+<style>
+div.mce-fullscreen {z-index: 9999;}
+</style>
 <?= HTML::script('media/tinymce/tinymce.min.js')?>
 <script type="text/javascript">
 tinyMCE.init({
@@ -115,9 +91,6 @@ tinyMCE.init({
 	language: 'zh_CN'
 });
 </script>
-<style>
-div.mce-fullscreen {z-index: 9999;}
-</style>
 
 <style>
 .up-item{float:left;width:160px;margin:5px;position:relative}
@@ -126,7 +99,6 @@ div.mce-fullscreen {z-index: 9999;}
 .up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
 </style>
 <?php include __DIR__ . '/plupload.php';?>
-
 <script>
 $(function() {
 	var uploader = new plupload.Uploader({
