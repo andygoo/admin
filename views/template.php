@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<?= HTML::script('media/adminlte/app.min.js')?>
+<?= HTML::script('media/adminlte/app.js')?>
 <script>
 $(function(){
 	$('.treeview-menu li.curr').parents('.treeview').attr('class', 'treeview active');
