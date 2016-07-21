@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-06-20 15:13:59
+Date: 2016-07-21 20:09:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1466397516', 'normal');
+INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469067619', 'normal');
 INSERT INTO `admin` VALUES ('12', '22', 'admin2', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '103.19.65.58', '1458735276', 'normal');
 INSERT INTO `admin` VALUES ('13', '4', 'test', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
 INSERT INTO `admin` VALUES ('100', '0', '11', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
@@ -247,28 +247,6 @@ INSERT INTO `article` VALUES ('396', '', '3', '买这几款车 绝逼是极致�
 INSERT INTO `article` VALUES ('399', 'hainan-mango', '44', '海南琼中绿芒', '2015/11/14/14474987807572.jpg', '', '二手车电商近几年来如雨后春笋般迅速增长出多交平台，每家都有自己的独门绝技，好车无忧就是其中之一。今天的女主角就是一位业绩非常高的微商店主---妮妮，同时她也是一位二手凯迪拉克SRX的车主，聊一聊她的二手车生活。', '<p><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646139995.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646126232.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646129694.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646135372.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646139563.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646130424.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646128182.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646128471.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646125826.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646120860.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646111197.jpg\" alt=\"\" /></p>\n<p><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646116504.jpg\" alt=\"\" /><img src=\"http://admin.com/imagefly/w800/2015/11/02/14464646125357.jpg\" alt=\"\" /></p>\n<p>不包邮地区：（辽宁.黑龙江.吉林（一件8元运费）. 内蒙、甘肃、青海、宁夏 （一件15元运费）</p>\n<p>不发货地区：西藏，西藏</p>', '1440838554', '1447501031', '10', '0', 'close');
 
 -- ----------------------------
--- Table structure for `auth_data`
--- ----------------------------
-DROP TABLE IF EXISTS `auth_data`;
-CREATE TABLE `auth_data` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `service_id` varchar(200) NOT NULL DEFAULT '',
-  `service_name` varchar(200) NOT NULL DEFAULT '',
-  `service_type` varchar(100) NOT NULL DEFAULT '',
-  `email` varchar(200) DEFAULT NULL,
-  `avatar` varchar(200) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `service_key` (`service_id`,`service_type`),
-  KEY `email_key` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of auth_data
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `category`
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
@@ -304,24 +282,84 @@ INSERT INTO `category` VALUES ('56', 'asass', '1', 'open');
 INSERT INTO `category` VALUES ('57', 'saassasa', '1', 'open');
 
 -- ----------------------------
+-- Table structure for `member`
+-- ----------------------------
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` char(64) NOT NULL DEFAULT '' COMMENT '密码',
+  `client_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '登录IP',
+  `last_login` int(11) NOT NULL DEFAULT '0' COMMENT '登陆时间',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `status` enum('normal','disabled') NOT NULL DEFAULT 'normal' COMMENT '状态',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='会员表';
+
+-- ----------------------------
+-- Records of member
+-- ----------------------------
+INSERT INTO `member` VALUES ('1', 'aaa', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469081664', '0', 'normal');
+INSERT INTO `member` VALUES ('6', 'aaa3', 'd6abc4ec4b95e01654ca1bfbfa4a4580bb9be070efcad00f8881c7d82b539cf9', '103.19.65.58', '1469082528', '1469082493', 'normal');
+
+-- ----------------------------
+-- Table structure for `oauth_qq_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `oauth_qq_user`;
+CREATE TABLE `oauth_qq_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(50) NOT NULL DEFAULT '' COMMENT 'openid',
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
+  `gender` int(5) NOT NULL DEFAULT '0' COMMENT '性别: 1:男性,2:女性,0:未知',
+  `figureurl` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+  PRIMARY KEY (`id`),
+  KEY `openid` (`openid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='QQ用户表';
+
+-- ----------------------------
+-- Records of oauth_qq_user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `oauth_wx_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `oauth_wx_user`;
+CREATE TABLE `oauth_wx_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(50) NOT NULL DEFAULT '' COMMENT 'openid',
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
+  `sex` int(5) NOT NULL DEFAULT '0' COMMENT '性别: 1:男性,2:女性,0:未知',
+  `city` varchar(100) NOT NULL DEFAULT '' COMMENT '城市',
+  `province` varchar(100) NOT NULL DEFAULT '' COMMENT '省份',
+  `country` varchar(100) NOT NULL DEFAULT '' COMMENT '国家',
+  `headimgurl` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+  PRIMARY KEY (`id`),
+  KEY `openid` (`openid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='微信用户表';
+
+-- ----------------------------
+-- Records of oauth_wx_user
+-- ----------------------------
+INSERT INTO `oauth_wx_user` VALUES ('1', 'oUcKEtwIP8_0VlA2VsKd7dATujGQ', '文杰', '1', '海淀', '北京', '中国', 'http://wx.qlogo.cn/mmopen/CttmTaYSYkS3fyWVgtngxRqQ8VC0XAUvRGQevIYzPS19pcW3D6EyhQx5LCHQj8Wo1vyDBmNaJm89J4ggvRwuOw/0');
+INSERT INTO `oauth_wx_user` VALUES ('2', 'oUcKEtwIP8_0VlA2VsKd7dATujGQ', '文杰', '1', '海淀', '北京', '中国', 'http://wx.qlogo.cn/mmopen/CttmTaYSYkS3fyWVgtngxRqQ8VC0XAUvRGQevIYzPS19pcW3D6EyhQx5LCHQj8Wo1vyDBmNaJm89J4ggvRwuOw/0');
+
+-- ----------------------------
 -- Table structure for `orders`
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
-  `order_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单ID',
-  `order_amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
-  `order_freight` decimal(8,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '订单运费，0=免运费',
-  `order_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '订单创建时间',
-  `order_status` enum('0','1','2') NOT NULL DEFAULT '0' COMMENT '订单状态：0=>交易中,1=>取消订单,2=>交易完成',
-  `pay_status` enum('0','1') NOT NULL DEFAULT '0' COMMENT '支付状态：0=>未支付,1=>已支付',
-  `ship_status` enum('0','1') NOT NULL DEFAULT '0' COMMENT '发货状态：0=>未发货,1=>已发货',
-  `delivery_channel` varchar(10) NOT NULL COMMENT '邮递方式：Express_5、EMS_15',
-  `receive_name` varchar(15) NOT NULL COMMENT '收货人姓名',
-  `receive_addr` varchar(80) NOT NULL COMMENT '收货地址',
-  `receive_mobile` varchar(16) NOT NULL COMMENT '收货人手机号',
-  `receive_zip` mediumint(6) unsigned NOT NULL DEFAULT '0' COMMENT '收货邮编',
-  `message` varchar(140) NOT NULL COMMENT '用户留言',
-  PRIMARY KEY (`order_id`)
+  `id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单ID',
+  `member_id` varchar(50) NOT NULL DEFAULT '' COMMENT '会员id',
+  `amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
+  `created_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '订单创建时间',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '订单状态',
+  `consignee` varchar(15) NOT NULL DEFAULT '' COMMENT '收货人姓名',
+  `phone` varchar(11) NOT NULL DEFAULT '' COMMENT '收货人手机号',
+  `address` varchar(100) NOT NULL DEFAULT '' COMMENT '收货地址',
+  `remark` varchar(140) NOT NULL DEFAULT '' COMMENT '用户备注',
+  PRIMARY KEY (`id`),
+  KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 -- ----------------------------
@@ -444,7 +482,7 @@ CREATE TABLE `upload` (
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `user_name` varchar(20) NOT NULL COMMENT '上传者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=465 DEFAULT CHARSET=utf8 COMMENT='上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8 COMMENT='上传文件表';
 
 -- ----------------------------
 -- Records of upload
@@ -703,6 +741,8 @@ INSERT INTO `upload` VALUES ('454', 'D:\\upload\\2016\\06\\09\\14654515334034.jp
 INSERT INTO `upload` VALUES ('455', 'D:\\upload\\2016\\06\\13\\14658144807895.jpg', '2016/06/13/14658144807895.jpg', 'jpg', '77461', '785', '572', '1465814480', 'admin');
 INSERT INTO `upload` VALUES ('463', 'D:\\upload\\2016\\06\\13\\14658191994365.jpg', '2016/06/13/14658191994365.jpg', 'jpg', '36395', '629', '768', '1465819199', 'admin');
 INSERT INTO `upload` VALUES ('464', 'D:\\upload\\2016\\06\\17\\14661694694696.jpg', '2016/06/17/14661694694696.jpg', 'jpg', '77461', '785', '572', '1466169469', 'admin');
+INSERT INTO `upload` VALUES ('465', 'D:\\data\\upload\\2016\\06\\25\\14668503510440.png', '2016/06/25/14668503510440.png', 'png', '637', '120', '120', '1466850351', 'admin');
+INSERT INTO `upload` VALUES ('466', 'D:\\data\\upload\\2016\\07\\06\\14678081292046.png', '2016/07/06/14678081292046.png', 'png', '22566', '1080', '260', '1467808129', 'admin');
 
 -- ----------------------------
 -- Table structure for `upload_qiniu`
@@ -718,7 +758,7 @@ CREATE TABLE `upload_qiniu` (
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `user_name` varchar(20) NOT NULL COMMENT '上传者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
 
 -- ----------------------------
 -- Records of upload_qiniu
@@ -1006,43 +1046,43 @@ INSERT INTO `upload_qiniu` VALUES ('463', 'http://image3.hc51img.com/wap/choujia
 INSERT INTO `upload_qiniu` VALUES ('464', 'http://image3.hc51img.com/wap/choujiang/title_r.png', 'png', '19373', '580', '353', '1465969688', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('465', 'http://image3.hc51img.com/wap/choujiang/btn_c.png', 'png', '3818', '139', '168', '1465969689', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('466', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/06/17/14661694883900.jpg', 'jpg', '77461', '785', '572', '1466169489', 'admin');
-
--- ----------------------------
--- Table structure for `user_tokens`
--- ----------------------------
-DROP TABLE IF EXISTS `user_tokens`;
-CREATE TABLE `user_tokens` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `token` varchar(50) NOT NULL DEFAULT '',
-  `driver` varchar(200) NOT NULL DEFAULT '',
-  `user_agent` varchar(200) NOT NULL DEFAULT '',
-  `expires` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `token` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user_tokens
--- ----------------------------
-
--- ----------------------------
--- Table structure for `wx_user`
--- ----------------------------
-DROP TABLE IF EXISTS `wx_user`;
-CREATE TABLE `wx_user` (
-  `openid` varchar(50) NOT NULL DEFAULT '' COMMENT 'openid',
-  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
-  `sex` int(5) NOT NULL DEFAULT '0' COMMENT '性别: 1:男性,2:女性,0:未知',
-  `city` varchar(100) NOT NULL DEFAULT '' COMMENT '城市',
-  `province` varchar(100) NOT NULL DEFAULT '' COMMENT '省份',
-  `country` varchar(100) NOT NULL DEFAULT '' COMMENT '国家',
-  `headimgurl` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
-  KEY `openid` (`openid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='微信用户表';
-
--- ----------------------------
--- Records of wx_user
--- ----------------------------
-INSERT INTO `wx_user` VALUES ('oUcKEtwIP8_0VlA2VsKd7dATujGQ', '文杰', '1', '海淀', '北京', '中国', 'http://wx.qlogo.cn/mmopen/CttmTaYSYkS3fyWVgtngxRqQ8VC0XAUvRGQevIYzPS19pcW3D6EyhQx5LCHQj8Wo1vyDBmNaJm89J4ggvRwuOw/0');
-INSERT INTO `wx_user` VALUES ('oUcKEtwIP8_0VlA2VsKd7dATujGQ', '文杰', '1', '海淀', '北京', '中国', 'http://wx.qlogo.cn/mmopen/CttmTaYSYkS3fyWVgtngxRqQ8VC0XAUvRGQevIYzPS19pcW3D6EyhQx5LCHQj8Wo1vyDBmNaJm89J4ggvRwuOw/0');
+INSERT INTO `upload_qiniu` VALUES ('467', 'http://image3.hc51img.com/2016/06/22/14665834694921.png', 'png', '221221', '640', '1136', '1466583470', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('468', 'http://image3.hc51img.com/2016/06/23/14666685555047.png', 'png', '2188', '65', '50', '1466668555', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('469', 'http://image3.hc51img.com/2016/06/23/14666685552418.jpg', 'jpg', '163625', '720', '1280', '1466668555', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('470', 'http://image3.hc51img.com/2016/06/23/14666685548674.jpg', 'jpg', '158270', '720', '1198', '1466668556', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('471', 'http://image3.hc51img.com/2016/06/23/14666686246341.png', 'png', '10395', '128', '128', '1466668625', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('472', 'http://image3.hc51img.com/2016/06/24/14667528597136.png', 'png', '132198', '720', '906', '1466752860', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('473', 'http://image3.hc51img.com/2016/06/24/14667528600781.png', 'png', '233883', '720', '1030', '1466752860', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('474', 'http://image3.hc51img.com/2016/06/25/14668355505416.jpg', 'jpg', '9295', '150', '82', '1466835551', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('475', 'http://image3.hc51img.com/wap/choujiang/1466668850.jpg', 'jpg', '21530', '608', '246', '1466838359', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('476', 'http://image3.hc51img.com/wap/choujiang/1466671820.png', 'png', '3808', '86', '86', '1466838359', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('477', 'http://image3.hc51img.com/wap/choujiang/1466740785.png', 'png', '25466', '580', '660', '1466838360', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('478', 'http://image3.hc51img.com/wap/choujiang/bg_ray.png', 'png', '27428', '900', '901', '1466838360', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('479', 'http://image3.hc51img.com/wap/choujiang/1466738565.png', 'png', '20840', '544', '544', '1466838360', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('480', 'http://image3.hc51img.com/wap/choujiang/1466741233.jpg', 'jpg', '24221', '580', '354', '1466838360', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('481', 'http://image3.hc51img.com/wap/choujiang/btn_c.png', 'png', '3818', '139', '168', '1466838360', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('482', 'http://image3.hc51img.com/wap/choujiang/title_c.png', 'png', '6765', '398', '100', '1466838360', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('483', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/06/27/14670235310430.jpg', 'jpg', '390886', '1080', '1920', '1467023531', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('484', 'http://image3.hc51img.com/2016/06/28/14670855336620.png', 'png', '130032', '720', '906', '1467085534', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('485', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/06/28/14671172206735.jpg', 'jpg', '34244', '1349', '315', '1467117221', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('486', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/06/28/14671174040932.jpg', 'jpg', '83019', '1349', '315', '1467117404', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('487', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/06/28/14671191571578.jpg', 'jpg', '9431', '1349', '180', '1467119157', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('488', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/07/01/14673617523734.jpg', 'jpg', '99515', '1440', '743', '1467361753', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('489', 'http://image3.hc51img.com/wap/store/chengdu.png', 'png', '21353', '640', '298', '1467624157', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('490', 'http://image3.hc51img.com/wap/store/cdmap.jpg', 'jpg', '35409', '640', '248', '1467624181', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('491', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/07/11/14682388066132.png', 'png', '3756', '128', '128', '1468238806', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('492', 'http://image3.hc51img.com/wap/choujiang/1468326990.png', 'png', '5196', '340', '120', '1468379366', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('493', 'http://image3.hc51img.com/wap/choujiang/1468327725.png', 'png', '3489', '139', '168', '1468379366', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('494', 'http://image3.hc51img.com/2016/07/15/14685531535925.jpg', 'jpg', '7700', '150', '68', '1468553153', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('495', 'http://image3.hc51img.com/2016/07/15/14685661012866.jpg', 'jpg', '3858', '100', '100', '1468566101', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('496', 'http://image3.hc51img.com/2016/07/18/14688076172794.jpg', 'jpg', '41514', '430', '430', '1468807618', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('497', 'http://image3.hc51img.com/2016/07/19/14689153803927.png', 'png', '8485', '188', '144', '1468915381', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('498', 'http://image3.hc51img.com/2016/07/19/14689153815670.png', 'png', '9652', '188', '144', '1468915381', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('499', 'http://image3.hc51img.com/choujiang/1468912880.png', 'png', '8485', '188', '144', '1468915442', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('500', 'http://image3.hc51img.com/choujiang/1468912941.png', 'png', '9652', '188', '144', '1468915442', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('501', 'http://image3.hc51img.com/2016/07/19/14689203988975.jpg', 'jpg', '45722', '640', '310', '1468920399', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('502', 'http://image3.hc51img.com/2016/07/19/14689320787344.png', 'png', '1328', '15', '15', '1468932079', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('503', 'http://image3.hc51img.com/2016/07/20/14689881511368.jpg', 'jpg', '38746', '610', '360', '1468988151', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('504', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/07/21/14690676575664.png', 'png', '7143', '200', '100', '1469067657', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('505', 'http://image3.hc51img.com/2016/07/21/14690676864773.png', 'png', '7143', '200', '100', '1469067687', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('506', 'http://image3.hc51img.com/2016/07/21/14690835056625.png', 'png', '40089', '900', '380', '1469083506', 'admin');
