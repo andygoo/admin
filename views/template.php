@@ -191,6 +191,8 @@ $(function(){
     		$.get(url, function(res) {
     			if (res.code == '302') {
         			replaceState(res.url);
+    				modal_close_history_back = false;
+    				$('.modal').modal('hide');
     			}
     		});
 		}

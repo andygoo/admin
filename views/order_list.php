@@ -12,7 +12,8 @@
 	<th>电话</th>
 	<th>地址</th>
 	<th>时间</th>
-	<th>状态</th>
+	<th>支付</th>
+	<th>发货</th>
 	<th>操作</th>
 </tr>
 </thead>
@@ -26,7 +27,8 @@
 	<td><?= $item['phone'] ?></td>
 	<td><?= $item['address'] ?></td>
 	<td><?= date('Y-m-d H:i', $item['created_at']) ?></td>
-	<td><?= $item['order_status'] ?></td>
+	<td><?= $item['pay_status'] ?></td>
+	<td><?= $item['deliver_status'] ?></td>
 	<td>
 	    <a href="<?php echo URL::site('order/goods?order_id='.$item['id'])?>" class="btn btn-info btn-xs ajax-modal">查看详情</a>
 	</td>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-07-21 20:09:29
+Date: 2016-07-23 10:40:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469067619', 'normal');
+INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469239313', 'normal');
 INSERT INTO `admin` VALUES ('12', '22', 'admin2', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '103.19.65.58', '1458735276', 'normal');
 INSERT INTO `admin` VALUES ('13', '4', 'test', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
 INSERT INTO `admin` VALUES ('100', '0', '11', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
@@ -300,8 +300,8 @@ CREATE TABLE `member` (
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO `member` VALUES ('1', 'aaa', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469081664', '0', 'normal');
-INSERT INTO `member` VALUES ('6', 'aaa3', 'd6abc4ec4b95e01654ca1bfbfa4a4580bb9be070efcad00f8881c7d82b539cf9', '103.19.65.58', '1469082528', '1469082493', 'normal');
+INSERT INTO `member` VALUES ('1', 'aaa', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469240984', '0', 'normal');
+INSERT INTO `member` VALUES ('6', 'aaa3', 'd6abc4ec4b95e01654ca1bfbfa4a4580bb9be070efcad00f8881c7d82b539cf9', '103.19.65.58', '1469175574', '1469082493', 'normal');
 
 -- ----------------------------
 -- Table structure for `oauth_qq_user`
@@ -315,7 +315,7 @@ CREATE TABLE `oauth_qq_user` (
   `figureurl` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='QQ用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='QQ用户表';
 
 -- ----------------------------
 -- Records of oauth_qq_user
@@ -351,9 +351,12 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '订单ID',
   `member_id` varchar(50) NOT NULL DEFAULT '' COMMENT '会员id',
-  `amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
+  `order_amount` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总金额',
+  `order_items` int(11) NOT NULL DEFAULT '0',
   `created_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '订单创建时间',
-  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '订单状态',
+  `pay_status` tinyint(4) NOT NULL DEFAULT '0',
+  `deliver_status` tinyint(4) NOT NULL DEFAULT '0',
+  `order_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '订单状态',
   `consignee` varchar(15) NOT NULL DEFAULT '' COMMENT '收货人姓名',
   `phone` varchar(11) NOT NULL DEFAULT '' COMMENT '收货人手机号',
   `address` varchar(100) NOT NULL DEFAULT '' COMMENT '收货地址',
@@ -365,6 +368,8 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('16071745640181', '1', '402.50', '2', '1469174564', '1', '1', '2', 'qqqqq', '13520173050', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '');
+INSERT INTO `orders` VALUES ('16071766462851', '1', '422.20', '4', '1469176646', '0', '0', '2', 'weew', '18500791685', '收货地址收货地址收货地址收货地址', '');
 
 -- ----------------------------
 -- Table structure for `order_goods`
@@ -373,21 +378,25 @@ DROP TABLE IF EXISTS `order_goods`;
 CREATE TABLE `order_goods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '所属订单ID',
-  `goods_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '商品ID',
-  `goods_name` varchar(60) NOT NULL COMMENT '商品名',
-  `goods_pic` varchar(100) NOT NULL COMMENT '商品缩略图',
-  `goods_opt` varchar(100) NOT NULL COMMENT '购买时用户选择的商品属性, 序列化',
+  `goods_id` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '商品ID',
   `goods_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品单价',
   `goods_qty` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '商品数量',
   `goods_total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总额',
+  `goods_opts` text NOT NULL COMMENT '购买时用户选择的商品属性, 序列化',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `order_id` (`order_id`,`goods_id`,`goods_opt`) USING BTREE,
-  KEY `goods_id` (`goods_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单明细表';
+  KEY `goods_id` (`goods_id`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='订单明细表';
 
 -- ----------------------------
 -- Records of order_goods
 -- ----------------------------
+INSERT INTO `order_goods` VALUES ('1', '16071745640181', '5341', '360.00', '1', '360.00', '{\"title\":\"\\u963f\\u65af\\u987f\\u00b7\\u9a6c\\u4e01 Rapide 2014\\u6b3e 6.0L S \\u767e\\u5e74\\u7eaa\\u5ff5\\u7248\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5341\"}');
+INSERT INTO `order_goods` VALUES ('2', '16071745640181', '5343', '42.50', '1', '42.50', '{\"title\":\"\\u5b9d\\u9a6cX3 2012\\u6b3e xDrive20i \\u8c6a\\u534e\\u578b\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5343\"}');
+INSERT INTO `order_goods` VALUES ('3', '16071766462851', '5341', '360.00', '1', '360.00', '{\"title\":\"\\u963f\\u65af\\u987f\\u00b7\\u9a6c\\u4e01 Rapide 2014\\u6b3e 6.0L S \\u767e\\u5e74\\u7eaa\\u5ff5\\u7248\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5341\"}');
+INSERT INTO `order_goods` VALUES ('4', '16071766462851', '5343', '42.50', '1', '42.50', '{\"title\":\"\\u5b9d\\u9a6cX3 2012\\u6b3e xDrive20i \\u8c6a\\u534e\\u578b\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5343\"}');
+INSERT INTO `order_goods` VALUES ('5', '16071766462851', '5342', '13.50', '1', '13.50', '{\"title\":\"\\u8f69\\u9038 2012\\u6b3e 1.8XV CVT\\u5c0a\\u4eab\\u7248\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5342\"}');
+INSERT INTO `order_goods` VALUES ('6', '16071766462851', '5344', '6.20', '1', '6.20', '{\"title\":\"\\u9a8a\\u5a01 2009\\u6b3e 1.6L \\u81ea\\u52a8\\u5168\\u80fd\\u578b\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5344\"}');
 
 -- ----------------------------
 -- Table structure for `permit`
@@ -758,7 +767,7 @@ CREATE TABLE `upload_qiniu` (
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `user_name` varchar(20) NOT NULL COMMENT '上传者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=508 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
 
 -- ----------------------------
 -- Records of upload_qiniu
@@ -1086,3 +1095,4 @@ INSERT INTO `upload_qiniu` VALUES ('503', 'http://image3.hc51img.com/2016/07/20/
 INSERT INTO `upload_qiniu` VALUES ('504', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/07/21/14690676575664.png', 'png', '7143', '200', '100', '1469067657', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('505', 'http://image3.hc51img.com/2016/07/21/14690676864773.png', 'png', '7143', '200', '100', '1469067687', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('506', 'http://image3.hc51img.com/2016/07/21/14690835056625.png', 'png', '40089', '900', '380', '1469083506', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('507', 'http://image3.hc51img.com/2016/07/23/14692407100385.jpg', 'jpg', '45854', '640', '310', '1469240710', 'admin');

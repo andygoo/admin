@@ -11,14 +11,17 @@ class Controller_Order extends Controller_Website {
         $pager = new Pager($total, $size);
         $list = $m_order->select($pager->offset, $size, $where)->as_array();
 
-        $order_status_arr = array(
-            '0' => '未支付', //立即支付
-            '1' => '待发货', //
-            '2' => '已发货', //确认发货
-            '3' => '已完成', //
+        $pay_status_arr = array(
+            '0' => '未支付',
+            '1' => '已支付',
+        );
+        $deliver_status_arr = array(
+            '0' => '未发货',
+            '1' => '已发货',
         );
         foreach ($list as &$item) {
-            $item['order_status'] = isset($order_status_arr[$item['status']]) ? $order_status_arr[$item['status']] : '';
+            $item['pay_status'] = isset($pay_status_arr[$item['pay_status']]) ? $pay_status_arr[$item['pay_status']] : '';
+            $item['deliver_status'] = isset($deliver_status_arr[$item['deliver_status']]) ? $deliver_status_arr[$item['deliver_status']] : '';
         }
         unset($item);
         
@@ -45,9 +48,9 @@ class Controller_Order extends Controller_Website {
         $order_id = Arr::get($_GET, 'order_id');
 
         $m_order = Model::factory('orders');
-        $ret = $m_order->update(array('status'=>2), array('id'=>$order_id));
+        $ret = $m_order->update(array('deliver_status'=>1), array('id'=>$order_id));
         if ($ret !== false) {
-            $this->redirect(Request::$referrer);
+            $this->redirect('order/list');
         }
     }
 }
