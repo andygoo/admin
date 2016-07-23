@@ -201,14 +201,16 @@ $(function(){
 	
 	$(document).on('submit', '.ajax-submit', function() {
 		var t = $(this);
-		var url = t.attr('action') || location.href;
+		var action = t.attr('action') || '';
+		var url = action || location.href;
 		var type = t.attr('method');
+		console.log(t.serialize());
 		$.ajax({
             type: type,
             url: url,
             data: t.serialize(),
             success: function(res) {
-        		console.log(res);
+        		//console.log(res);
     			//var res = eval('('+res+')');
     			if (res.code == '302') {
     				pushState(res.url);
@@ -221,6 +223,14 @@ $(function(){
 		                title: document.title,
 		                html: res
 		            };
+		            /*
+		            if (type == 'get') {
+		            	if (url.indexOf('?') == -1) {
+		            	    url = action + '?' + t.serialize();
+		            	} else {
+		            	    url = action + '&' + t.serialize();
+		            	}
+		            }*/
 		            history.pushState(state,null,url);
     			}
             }

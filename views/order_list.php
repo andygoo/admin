@@ -1,5 +1,37 @@
 
+<?= HTML::style('media/pikaday/css/pikaday.css')?>
+<?= HTML::script('media/pikaday/js/pikaday.js')?>
+
 <h3 class="page-header">订单列表</h3>
+
+<form class="form-inline ajax-submit" method="get">
+	<div class="form-group">
+		<input type="text" class="form-control" id="date" name="date" placeholder="日期" value="<?= Arr::get($_GET, 'date', date('Y-m-d')) ?>">
+	</div>
+
+    <div class="form-group">
+        <select class="form-control" name="pay_status">
+			<option value="">支付状态</option>
+			<?php $pay_status = Arr::get($_GET, 'pay_status', '');?>
+			<?php foreach ($pay_status_arr as $key => $item):?>
+			<option value="<?php echo $key?>" <?php if($pay_status!=='' && $pay_status==$key):?>selected<?php endif;?>><?php echo $item?></option>
+			<?php endforeach;?>
+        </select>
+    </div>
+    <div class="form-group">
+        <select class="form-control" name="deliver_status">
+			<option value="">发货状态</option>
+			<?php $deliver_status = Arr::get($_GET, 'deliver_status', '');?>
+			<?php foreach ($deliver_status_arr as $key => $item):?>
+			<option value="<?php echo $key?>" <?php if($deliver_status!=='' && $deliver_status==$key):?>selected<?php endif;?>><?php echo $item?></option>
+			<?php endforeach;?>
+        </select>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info" type="submit">查找</button>
+    </div>
+</form>
+<br>
 
 <div class="table-responsive">
 <table class="table table-hover table-bordered">
@@ -39,3 +71,14 @@
 </div>
 
 <?= $pager ?>
+
+<script>
+$(function() {
+	var picker = new Pikaday({
+	    field: document.getElementById('date'),
+	    //format: 'YYYY/MM/DD',
+	    minDate: new Date('2015-06-01'),
+	    maxDate: new Date('<?php echo date('Y-m-d')?>')
+	});
+});
+</script>
