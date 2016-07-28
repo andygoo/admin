@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-06-20 15:14:10
+Date: 2016-07-28 16:18:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ CREATE TABLE `auction` (
 -- ----------------------------
 -- Records of auction
 -- ----------------------------
-INSERT INTO `auction` VALUES ('4', '', '[\"http:\\/\\/7xkkhh.com1.z0.glb.clouddn.com\\/2016\\/06\\/11\\/14656335468760.jpg?802x599\",\"2016\\/06\\/09\\/14654460029698.jpg?802x608\",\"2016\\/06\\/09\\/14654460025608.jpg?802x421\",\"2016\\/06\\/09\\/14654460028432.jpg?559x802\"]', '贾又福，1965年毕业于中央美术学院，后潜心山水画创作并进修人物画。现为中央美院国画系教授，中国美术家协会理事，中央美术学院学术', '1465629840', '1465636260', '3', '3', '3', '216', '0', '0', '0');
+INSERT INTO `auction` VALUES ('4', '', '[\"http:\\/\\/7xkkhh.com1.z0.glb.clouddn.com\\/2016\\/06\\/11\\/14656335468760.jpg?802x599\",\"2016\\/06\\/09\\/14654460029698.jpg?802x608\",\"2016\\/06\\/09\\/14654460025608.jpg?802x421\",\"2016\\/06\\/09\\/14654460028432.jpg?559x802\"]', '贾又福，1965年毕业于中央美术学院，后潜心山水画创作并进修人物画。现为中央美院国画系教授，中国美术家协会理事，中央美术学院学术', '1469499840', '1469545860', '3', '3', '3', '219', '1', '0', '0');
 INSERT INTO `auction` VALUES ('5', '', '[\"2016\\/06\\/09\\/14654460401932.jpg?802x599\",\"2016\\/06\\/09\\/14654460410069.jpg?3732x2592\",\"2016\\/06\\/09\\/14654460408913.jpg?3369x2592\",\"2016\\/06\\/09\\/14654460404265.jpg?775x802\"]', '作者: 刘金凯\n创作时间/年代: 不详\n尺寸: 69*69\n装裱方式: 未装裱\n材质工艺: 纸本\n字体: 行书\n字画性质: 原稿\n品相: 十品\n书法类型: 毛笔\n书法形式: 斗方', '1465430400', '1465484400', '2', '3', '4', '576', '0', '0', '0');
 INSERT INTO `auction` VALUES ('6', '', '[\"2016\\/06\\/09\\/14654460688867.jpg?2376x2355\",\"2016\\/06\\/09\\/14654460672583.jpg?3474x2592\",\"2016\\/06\\/09\\/14654460673317.jpg?3414x1686\",\"2016\\/06\\/09\\/14654460662515.jpg?2592x3888\",\"2016\\/06\\/09\\/14654460661239.jpg?3420x2592\"]', '徐乐乐，现为江苏省国画院一级美术师。作品曾获第七届全国美术展览金奖，并参加过“深圳国际水墨画展”、“中国新文人画展”、“中国女画', '1465430400', '1465430400', '3', '34', '34', '0', '0', '0', '0');
 INSERT INTO `auction` VALUES ('7', '', '[\"2016\\/06\\/09\\/14654460825248.jpg?3726x2592\",\"2016\\/06\\/09\\/14654460820047.jpg?3840x2593\",\"2016\\/06\\/09\\/14654460811065.jpg?3888x2592\"]', '作者: 刘金凯\n创作时间/年代: 不详\n尺寸: 69*69\n装裱方式: 未装裱\n材质工艺: 纸本\n字体: 行书\n字画性质: 原稿\n品相: 十品\n书法类型: 毛笔\n书法形式: 斗方', '1465430400', '1465487700', '0', '30', '500', '7685555', '0', '0', '0');
@@ -54,14 +54,14 @@ DROP TABLE IF EXISTS `bidlog`;
 CREATE TABLE `bidlog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL DEFAULT '0' COMMENT '拍品id',
-  `bidder_openid` varchar(50) NOT NULL DEFAULT '0' COMMENT '竞买人id',
-  `bidder_name` varchar(50) NOT NULL DEFAULT '' COMMENT '竞买人名',
-  `bidder_avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '竞买人头像',
+  `user_id` varchar(50) NOT NULL DEFAULT '0' COMMENT '竞买人id',
+  `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '竞买人名',
+  `user_avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '竞买人头像',
   `price` int(11) NOT NULL DEFAULT '0' COMMENT '出价',
   `time` int(11) NOT NULL DEFAULT '0' COMMENT '出价时间',
   `type` tinyint(4) NOT NULL COMMENT '出价方式：代理，正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bidlog
@@ -284,3 +284,4 @@ INSERT INTO `bidlog` VALUES ('215', '4', 'openid11111111111', '清明上河图',
 INSERT INTO `bidlog` VALUES ('216', '4', 'openid11111111111', '清明上河图', 'http://static.oschina.net/uploads/user/33/66764_100.jpg', '210', '1465549547', '0');
 INSERT INTO `bidlog` VALUES ('217', '4', 'oUcKEtwIP8_0VlA2VsKd7dATujGQ', '文杰', 'http://wx.qlogo.cn/mmopen/CttmTaYSYkS3fyWVgtngxRqQ8VC0XAUvRGQevIYzPS19pcW3D6EyhQx5LCHQj8Wo1vyDBmNaJm89J4ggvRwuOw/0', '213', '1465629856', '0');
 INSERT INTO `bidlog` VALUES ('218', '4', 'openid11111111111', '清明上河图', 'http://static.oschina.net/uploads/user/33/66764_100.jpg', '216', '1465630164', '0');
+INSERT INTO `bidlog` VALUES ('219', '4', '1', 'aaa', '', '219', '1469524749', '0');
