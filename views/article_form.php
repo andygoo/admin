@@ -92,6 +92,19 @@ tinyMCE.init({
 });
 </script>
 
+<!-- 
+<?php HTML::script('media/js/resizeable.js')?>
+<style>
+.resizable-east { width:10px; height:100%; position:absolute; top:0; right:0; cursor:e-resize; }
+.resizable-north { width:100%; height:10px; position:absolute; left:0; bottom:0; cursor:n-resize; }
+.resizable-north-west { width:20px; height:20px; position:absolute; right:0; bottom:0; cursor:nw-resize; }
+</style>
+<script>
+$(function() {
+    Resizeable('.mce-window');
+});
+</script> -->
+
 <style>
 .up-item{float:left;width:160px;margin:5px;position:relative}
 .up-item .close{position:absolute;right:3px;top:0;}
