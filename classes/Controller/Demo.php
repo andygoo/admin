@@ -17,5 +17,9 @@ class Controller_Demo extends Controller_Website {
     public function action_city() {
         $this->content = View::factory('demo_city');
     }
+    
+    public function action_math() {
+        $this->content = View::factory('demo_math');
+    }
 }
 
