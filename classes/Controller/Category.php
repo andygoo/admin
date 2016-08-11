@@ -73,7 +73,7 @@ class Controller_Category extends Controller_Website {
     public function action_del() {
         $id = $_GET['id'];
         $model = Model::factory('category');
-        $ret = $model->del($id);
+        $ret = $model->deleteById($id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
         }
