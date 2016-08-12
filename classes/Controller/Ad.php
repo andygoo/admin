@@ -4,7 +4,14 @@ class Controller_Ad extends Controller_Website {
     
     public $plats = array('pc', 'wap', 'app');
     public $cities = array(12=>'北京', 15=>'重庆', 45=>'成都', 103=>'郑州', 113=>'济南', 67=>'苏州');
-    public $types = array('banner1'=>'pc首页大轮播图', 'banner2'=>'pc首页三运营小图', 'banner3'=>'wap首页轮播图', 'banner4'=>'首页底部买车分享贴');
+    public $types = array(
+            'pc_home_top_slider'=>'pc首页顶部轮播图', 
+            'pc_home_mid_banner'=>'pc首页中间运营图', 
+            'wap_home_top_slider'=>'wap首页顶部轮播图', 
+            'app_home_top_slider'=>'app首页顶部轮播图', 
+            'm_home_mid_banner'=>'移动端首页中间运营图',
+            'm_home_btm_posts'=>'移动端首页底部买车分享贴',
+    );
 
     public function before() {
         parent::before();
@@ -17,7 +24,7 @@ class Controller_Ad extends Controller_Website {
     public function action_list() {
         $where = array();
         $where['ORDER'] = '`order` ASC, id DESC';
-        $where['type'] = Arr::get($_GET, 'type');
+        $where['type'] = Arr::get($_GET, 'type', 'pc_home_top_slider');
         $where = array_filter($where);
         $plat = Arr::get($_GET, 'plat');
         if (!empty($plat)) {
@@ -42,9 +49,10 @@ class Controller_Ad extends Controller_Website {
                 $this->redirect('ad/list');
             }
         }
+        $info = null;
     
         $this->content = View::factory('ad_add');
-        $this->content->info = null;
+        $this->content->info = $info;
     }
     
     public function action_edit() {

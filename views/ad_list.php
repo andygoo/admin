@@ -6,7 +6,6 @@
 <form class="form-inline ajax-submit" method="get">
     <div class="form-group">
         <select class="form-control" name="type">
-			<option value="">选择广告位</option>
     	    <?php foreach ($types as $key=>$type):?>
 			<option value="<?= $key?>" <?php if(Arr::get($_GET, 'type')==$key):?>selected<?php endif;?>><?= $type?></option>
             <?php endforeach;?>
@@ -39,8 +38,7 @@
 <table class="table table-hover table-bordered">
 <thead>
 <tr>
-	<th>ID</th>
-	<th>类别</th>
+	<th>广告位</th>
 	<th>标题</th>
 	<th>排序</th>
 	<th>平台</th>
@@ -59,8 +57,7 @@ foreach ($city_arr as $city_id) {
 }
 ?>
 <tr>
-	<td><?= $item['id'] ?></td>
-	<td><?= $types[$item['type']] ?></td>
+	<td><?= isset($types[$item['type']]) ? $types[$item['type']] : '' ?></td>
 	<td>
 	<?php $link_url = !empty($item['link_url']) ? $item['link_url'] : '#'?>
 	<a href="<?= $link_url?>" target="_blank">
