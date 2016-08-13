@@ -14,6 +14,9 @@
 //require(['jquery', 'cities'], function($, all_cities) {
 require(['cities'], function(all_cities) {
 
+    var init_city = ['湖南省','邵阳市','隆回县'];
+    var init_city = init_city || [];
+    
 	$(document).on('change', '#city', function() {
 		var idx_prov = $(this).prev('select').find('option:selected').index();
 		var idx_city = $(this).find('option:selected').index();
@@ -24,7 +27,8 @@ require(['cities'], function(all_cities) {
 		} else {
     		var options = '';
     		for(var i in data) {
-    			options += '<option value="'+data[i]['code']+'">'+data[i]['name']+'</option>';
+            	var selected = (init_city[2] && init_city[2]==data[i]['name']) ? 'selected' : '';
+    			options += '<option value="'+data[i]['code']+'" '+selected+'>'+data[i]['name']+'</option>';
     		}
     		$(this).next('select').empty().append(options).show();
 		}
@@ -39,7 +43,8 @@ require(['cities'], function(all_cities) {
 		} else {
     		var options = '';
     		for(var i in data) {
-    			options += '<option value="'+data[i]['code']+'">'+data[i]['name']+'</option>';
+            	var selected = (init_city[1] && init_city[1]==data[i]['name']) ? 'selected' : '';
+    			options += '<option value="'+data[i]['code']+'" '+selected+'>'+data[i]['name']+'</option>';
     		}
     		$(this).next('select').empty().append(options).show().change();
 		}
@@ -49,7 +54,8 @@ require(['cities'], function(all_cities) {
     	var data = all_cities;
     	var options = '';
     	for(var i in data) {
-    		options += '<option value="'+data[i]['code']+'">'+data[i]['name']+'</option>';
+        	var selected = (init_city[0] && init_city[0]==data[i]['name']) ? 'selected' : '';
+    		options += '<option value="'+data[i]['code']+'" '+selected+'>'+data[i]['name']+'</option>';
     	}
     	$('#prov').empty().append(options).change();
 	})();
