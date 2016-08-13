@@ -19,7 +19,7 @@ require(['cities'], function(all_cities) {
 		var idx_city = $(this).find('option:selected').index();
 		var data = all_cities[idx_prov]['children'][idx_city]['children'];
 		
-		if (typeof data == 'undefined') {
+		if (!data) {
 			$(this).nextAll('select').empty().hide();
 		} else {
     		var options = '';
@@ -34,7 +34,7 @@ require(['cities'], function(all_cities) {
 		var idx_prov = $(this).find('option:selected').index();
 		var data = all_cities[idx_prov]['children'];
 		
-		if (typeof data == 'undefined') {
+		if (!data) {
 			$(this).nextAll('select').empty().hide();
 		} else {
     		var options = '';
