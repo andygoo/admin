@@ -1,16 +1,18 @@
 <h3 class="page-header">demo city</h3>
 
-
-<?= HTML::script('media/js/city.js')?>
-
 <div id="c">
     <select class="form-control pull-left" style="width:150px;margin-right: 5px;" id="prov"></select>
     <select class="form-control pull-left" style="width:150px;margin-right: 5px;display: none" id="city"></select>
     <select class="form-control" style="width:150px;display: none" id="coun"></select>
 </div>
 
+<?php HTML::script('media/js/city.js')?>
+<?= HTML::script('media/js/require.js', array('data-main'=>'/media/js/config'))?>
+
 <script>
-$(function () {
+//$(function () {
+//require(['jquery', 'cities'], function($, all_cities) {
+require(['cities'], function(all_cities) {
 
 	$(document).on('change', '#city', function() {
 		var idx_prov = $(this).prev('select').find('option:selected').index();
@@ -51,26 +53,5 @@ $(function () {
     	}
     	$('#prov').empty().append(options).change();
 	})();
-
-/*
-$(document).on('change', '.landtype', function() {
-	var t = $(this);
-	var v = t.val();
-	$('#tid').val(v);
-	var url = '';
-	var params = {};
-	$.post(url, params, function(res) {
-		var res = eval('('+res+')');
-		var data = res.data;
-		t.nextAll('select').hide();
-        var options = '';
-		for(var i in data) {
-			var item = data[i];
-	        options += '<option value="'+item.id+'">'+item.name+'</option>';
-		}
-		t.next('select').empty().append(options).show();
-	});
-});
-*/
 });
 </script>
