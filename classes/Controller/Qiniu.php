@@ -1,6 +1,6 @@
 <?php
 
-require APPPATH . 'vendor/qiniu/autoload.php';
+require APPPATH . 'vendor/autoload.php';
 
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;

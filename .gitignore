@@ -5,3 +5,4 @@ cache
 config
 logs
 ueditor
+/composer.lock
