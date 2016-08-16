@@ -6,4 +6,19 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Qiniu\\Auth' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Auth.php',
+    'Qiniu\\Config' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Config.php',
+    'Qiniu\\Etag' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Etag.php',
+    'Qiniu\\Http\\Client' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Http/Client.php',
+    'Qiniu\\Http\\Error' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Http/Error.php',
+    'Qiniu\\Http\\Request' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Http/Request.php',
+    'Qiniu\\Http\\Response' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Http/Response.php',
+    'Qiniu\\Processing\\ImageUrlBuilder' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Processing/ImageUrlBuilder.php',
+    'Qiniu\\Processing\\Operation' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Processing/Operation.php',
+    'Qiniu\\Processing\\PersistentFop' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Processing/PersistentFop.php',
+    'Qiniu\\Storage\\BucketManager' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Storage/BucketManager.php',
+    'Qiniu\\Storage\\FormUploader' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Storage/FormUploader.php',
+    'Qiniu\\Storage\\ResumeUploader' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Storage/ResumeUploader.php',
+    'Qiniu\\Storage\\UploadManager' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Storage/UploadManager.php',
+    'Qiniu\\Zone' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Zone.php',
 );
