@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-07-23 10:40:58
+Date: 2016-08-17 16:38:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469239313', 'normal');
+INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1471414547', 'normal');
 INSERT INTO `admin` VALUES ('12', '22', 'admin2', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '103.19.65.58', '1458735276', 'normal');
 INSERT INTO `admin` VALUES ('13', '4', 'test', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
 INSERT INTO `admin` VALUES ('100', '0', '11', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
@@ -46,6 +46,36 @@ INSERT INTO `admin` VALUES ('106', '7', 'ddd', '55697d46756378fd4e9d8338a7ddd1c7
 INSERT INTO `admin` VALUES ('107', '0', '111', 'd4b3b4858f5bd76ad0fc5dfc7efcaa0451577ab591a1de49480a078218e853a8', '', '0', 'normal');
 INSERT INTO `admin` VALUES ('126', '0', 'admin1', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
 INSERT INTO `admin` VALUES ('128', '0', 'admin3', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
+
+-- ----------------------------
+-- Table structure for `ad_banner`
+-- ----------------------------
+DROP TABLE IF EXISTS `ad_banner`;
+CREATE TABLE `ad_banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL DEFAULT '' COMMENT '位置',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '标题',
+  `pic_url` varchar(100) NOT NULL DEFAULT '' COMMENT '图片',
+  `link_url` varchar(255) NOT NULL DEFAULT '' COMMENT '链接',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `plat` varchar(50) NOT NULL DEFAULT '' COMMENT '平台',
+  `city` varchar(100) NOT NULL DEFAULT '' COMMENT '城市',
+  `order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ad_banner
+-- ----------------------------
+INSERT INTO `ad_banner` VALUES ('1', 'm_home_top_slider', '豪车一月思考角度上看见', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/17/14714145855076.png', 'http://ddffdf', '0', '1471414587', 'app', '15|45|103|113|67', '0', '1');
+INSERT INTO `ad_banner` VALUES ('4', 'm_home_top_slider', '降价活动开始啦', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', 'http://ddffdf', '1470897102', '1471407523', '|app|', '|12|15|45|103|113|67|', '0', '1');
+INSERT INTO `ad_banner` VALUES ('5', 'm_home_btm_posts', '降价活动开始啦', '', 'http://ddffdf', '1470901806', '1470970403', '|wap|app|', '|12|15|45|103|113|67|', '23', '1');
+INSERT INTO `ad_banner` VALUES ('7', 'm_home_mid_banner', '而日日日日日日日日日日日日日日日日日日日日日', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', '1470969209', '1471420617', 'wap', '15|45|103|113|67', '0', '1');
+INSERT INTO `ad_banner` VALUES ('8', '', '', '', '', '1471407309', '0', '|wap|app|', '|12|15|45|103|113|67|', '0', '1');
+INSERT INTO `ad_banner` VALUES ('9', 'm_home_top_slider', 'w', '', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', '1471413289', '0', 'wap|app', '12|15|45|103|113|67', '0', '1');
 
 -- ----------------------------
 -- Table structure for `article`
@@ -289,19 +319,24 @@ CREATE TABLE `member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
   `password` char(64) NOT NULL DEFAULT '' COMMENT '密码',
+  `phone` varchar(11) NOT NULL,
   `client_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '登录IP',
   `last_login` int(11) NOT NULL DEFAULT '0' COMMENT '登陆时间',
   `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `status` enum('normal','disabled') NOT NULL DEFAULT 'normal' COMMENT '状态',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='会员表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO `member` VALUES ('1', 'aaa', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1469240984', '0', 'normal');
-INSERT INTO `member` VALUES ('6', 'aaa3', 'd6abc4ec4b95e01654ca1bfbfa4a4580bb9be070efcad00f8881c7d82b539cf9', '103.19.65.58', '1469175574', '1469082493', 'normal');
+INSERT INTO `member` VALUES ('1', 'aaa', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '', '103.19.65.58', '1470127074', '0', 'normal');
+INSERT INTO `member` VALUES ('6', 'aaa3', 'd6abc4ec4b95e01654ca1bfbfa4a4580bb9be070efcad00f8881c7d82b539cf9', '', '103.19.65.58', '1469175574', '1469082493', 'normal');
+INSERT INTO `member` VALUES ('7', 'sd', '09d85c08d43fb377c2f5e3002b9ed28592bd4411ced1d8236b13595ecf2012e7', '', '218.28.234.213', '1469515265', '1469252749', 'normal');
+INSERT INTO `member` VALUES ('8', 'as', '1457cbc29710d02dd0bd36df5d206e3076fc21924851b0c4384a337a2f427180', '', '', '0', '1469253564', 'normal');
+INSERT INTO `member` VALUES ('9', '13520173050', '', '', '', '0', '0', 'normal');
+INSERT INTO `member` VALUES ('10', '18500791685', '7c69d7df76cfebe7bedd3deb644491cd14f5d400a9b7a5ffac4e8b36d0e699be', '18500791685', '', '0', '1469860165', 'normal');
 
 -- ----------------------------
 -- Table structure for `oauth_qq_user`
@@ -370,6 +405,8 @@ CREATE TABLE `orders` (
 -- ----------------------------
 INSERT INTO `orders` VALUES ('16071745640181', '1', '402.50', '2', '1469174564', '1', '1', '2', 'qqqqq', '13520173050', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '');
 INSERT INTO `orders` VALUES ('16071766462851', '1', '422.20', '4', '1469176646', '0', '0', '2', 'weew', '18500791685', '收货地址收货地址收货地址收货地址', '');
+INSERT INTO `orders` VALUES ('16075282438963', '1', '360.00', '1', '1469528243', '0', '0', '0', '杨钰莹', '18500791685', '法国会8', '');
+INSERT INTO `orders` VALUES ('16076016532486', '1', '720.00', '2', '1469601653', '0', '0', '0', '杨钰莹', '18500791685', '通过改革发大水', '');
 
 -- ----------------------------
 -- Table structure for `order_goods`
@@ -386,7 +423,7 @@ CREATE TABLE `order_goods` (
   PRIMARY KEY (`id`),
   KEY `goods_id` (`goods_id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='订单明细表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='订单明细表';
 
 -- ----------------------------
 -- Records of order_goods
@@ -397,6 +434,8 @@ INSERT INTO `order_goods` VALUES ('3', '16071766462851', '5341', '360.00', '1', 
 INSERT INTO `order_goods` VALUES ('4', '16071766462851', '5343', '42.50', '1', '42.50', '{\"title\":\"\\u5b9d\\u9a6cX3 2012\\u6b3e xDrive20i \\u8c6a\\u534e\\u578b\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5343\"}');
 INSERT INTO `order_goods` VALUES ('5', '16071766462851', '5342', '13.50', '1', '13.50', '{\"title\":\"\\u8f69\\u9038 2012\\u6b3e 1.8XV CVT\\u5c0a\\u4eab\\u7248\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5342\"}');
 INSERT INTO `order_goods` VALUES ('6', '16071766462851', '5344', '6.20', '1', '6.20', '{\"title\":\"\\u9a8a\\u5a01 2009\\u6b3e 1.6L \\u81ea\\u52a8\\u5168\\u80fd\\u578b\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5344\"}');
+INSERT INTO `order_goods` VALUES ('7', '16075282438963', '5341', '360.00', '1', '360.00', '{\"title\":\"\\u963f\\u65af\\u987f\\u00b7\\u9a6c\\u4e01 Rapide 2014\\u6b3e 6.0L S \\u767e\\u5e74\\u7eaa\\u5ff5\\u7248\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5341\"}');
+INSERT INTO `order_goods` VALUES ('8', '16076016532486', '5341', '360.00', '2', '720.00', '{\"title\":\"\\u963f\\u65af\\u987f\\u00b7\\u9a6c\\u4e01 Rapide 2014\\u6b3e 6.0L S \\u767e\\u5e74\\u7eaa\\u5ff5\\u7248\",\"pic\":\"http:\\/\\/image1.hc51img.com\\/966dc951cc5-0f3e-4b5f-8fa3-0279f0915284.jpg?imageView2\\/1\\/w\\/280\\/h\\/210\",\"url\":\"\\/detail\\/5341\"}');
 
 -- ----------------------------
 -- Table structure for `permit`
@@ -467,7 +506,7 @@ CREATE TABLE `sms_queue` (
   `send_time` int(11) NOT NULL DEFAULT '0' COMMENT '发送时间',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '发送返回状态',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='短信队列表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='短信队列表';
 
 -- ----------------------------
 -- Records of sms_queue
@@ -475,6 +514,21 @@ CREATE TABLE `sms_queue` (
 INSERT INTO `sms_queue` VALUES ('1', '18600791689', '66145', '您正在使用注册功能，验证码为：66145', 'reg', '1437377957', '0', '0');
 INSERT INTO `sms_queue` VALUES ('2', '18600791689', '49690', '您正在使用注册功能，验证码为：49690', 'reg', '1437380320', '0', '0');
 INSERT INTO `sms_queue` VALUES ('3', '18600791687', '12449', '您正在使用注册功能，验证码为：12449', 'reg', '1437380347', '0', '0');
+INSERT INTO `sms_queue` VALUES ('4', '13520173050', '62241', '您的登录验证码为：62241', 'login', '1469856696', '0', '0');
+INSERT INTO `sms_queue` VALUES ('5', '13520173050', '37348', '您的登录验证码为：37348', 'login', '1469856800', '0', '0');
+INSERT INTO `sms_queue` VALUES ('6', '13520173050', '20276', '您的登录验证码为：20276', 'login', '1469856858', '0', '0');
+INSERT INTO `sms_queue` VALUES ('7', '13520173050', '21195', '您的登录验证码为：21195', 'login', '1469857099', '0', '0');
+INSERT INTO `sms_queue` VALUES ('8', '13520173050', '44596', '您的登录验证码为：44596', 'login', '1469857507', '0', '0');
+INSERT INTO `sms_queue` VALUES ('9', '13520173050', '48742', '您的登录验证码为：48742', 'login', '1469857584', '0', '0');
+INSERT INTO `sms_queue` VALUES ('10', '13520173050', '64381', '您的登录验证码为：64381', 'login', '1469857852', '0', '0');
+INSERT INTO `sms_queue` VALUES ('11', '13520173050', '05106', '您的登录验证码为：05106', 'login', '1469857914', '0', '0');
+INSERT INTO `sms_queue` VALUES ('12', '13520173050', '65300', '您的登录验证码为：65300', 'login', '1469857990', '0', '0');
+INSERT INTO `sms_queue` VALUES ('13', '13520173050', '62896', '您的登录验证码为：62896', 'login', '1469858135', '0', '0');
+INSERT INTO `sms_queue` VALUES ('14', '13520173050', '09410', '您的登录验证码为：09410', 'login', '1469858761', '0', '0');
+INSERT INTO `sms_queue` VALUES ('15', '13520173050', '91288', '您的登录验证码为：91288', 'login', '1469858860', '0', '0');
+INSERT INTO `sms_queue` VALUES ('16', '13520173050', '05868', '您的登录验证码为：05868', 'login', '1469858992', '0', '0');
+INSERT INTO `sms_queue` VALUES ('17', '13520173050', '26381', '您的登录验证码为：26381', 'login', '1469859155', '0', '0');
+INSERT INTO `sms_queue` VALUES ('18', '18500791685', '81258', '您的登录验证码为：81258', 'login', '1469860150', '0', '0');
 
 -- ----------------------------
 -- Table structure for `upload`
@@ -491,7 +545,7 @@ CREATE TABLE `upload` (
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `user_name` varchar(20) NOT NULL COMMENT '上传者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8 COMMENT='上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=472 DEFAULT CHARSET=utf8 COMMENT='上传文件表';
 
 -- ----------------------------
 -- Records of upload
@@ -752,6 +806,11 @@ INSERT INTO `upload` VALUES ('463', 'D:\\upload\\2016\\06\\13\\14658191994365.jp
 INSERT INTO `upload` VALUES ('464', 'D:\\upload\\2016\\06\\17\\14661694694696.jpg', '2016/06/17/14661694694696.jpg', 'jpg', '77461', '785', '572', '1466169469', 'admin');
 INSERT INTO `upload` VALUES ('465', 'D:\\data\\upload\\2016\\06\\25\\14668503510440.png', '2016/06/25/14668503510440.png', 'png', '637', '120', '120', '1466850351', 'admin');
 INSERT INTO `upload` VALUES ('466', 'D:\\data\\upload\\2016\\07\\06\\14678081292046.png', '2016/07/06/14678081292046.png', 'png', '22566', '1080', '260', '1467808129', 'admin');
+INSERT INTO `upload` VALUES ('467', 'D:\\data\\upload\\2016\\08\\17\\14714123962471.jpg', '2016/08/17/14714123962471.jpg', 'jpg', '343930', '640', '1136', '1471412396', 'admin');
+INSERT INTO `upload` VALUES ('468', 'D:\\data\\upload\\2016\\08\\17\\14714139747949.png', '2016/08/17/14714139747949.png', 'png', '114625', '640', '1136', '1471413974', 'admin');
+INSERT INTO `upload` VALUES ('469', 'D:\\data\\upload\\2016\\08\\17\\14714139789828.png', '2016/08/17/14714139789828.png', 'png', '125186', '640', '1136', '1471413978', 'admin');
+INSERT INTO `upload` VALUES ('470', 'D:\\data\\upload\\2016\\08\\17\\14714140144805.jpg', '2016/08/17/14714140144805.jpg', 'jpg', '343930', '640', '1136', '1471414014', 'admin');
+INSERT INTO `upload` VALUES ('471', 'D:\\data\\upload\\2016\\08\\17\\14714140222901.png', '2016/08/17/14714140222901.png', 'png', '125186', '640', '1136', '1471414022', 'admin');
 
 -- ----------------------------
 -- Table structure for `upload_qiniu`
@@ -767,7 +826,7 @@ CREATE TABLE `upload_qiniu` (
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `user_name` varchar(20) NOT NULL COMMENT '上传者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=508 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=526 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
 
 -- ----------------------------
 -- Records of upload_qiniu
@@ -1096,3 +1155,21 @@ INSERT INTO `upload_qiniu` VALUES ('504', 'http://7xkkhh.com1.z0.glb.clouddn.com
 INSERT INTO `upload_qiniu` VALUES ('505', 'http://image3.hc51img.com/2016/07/21/14690676864773.png', 'png', '7143', '200', '100', '1469067687', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('506', 'http://image3.hc51img.com/2016/07/21/14690835056625.png', 'png', '40089', '900', '380', '1469083506', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('507', 'http://image3.hc51img.com/2016/07/23/14692407100385.jpg', 'jpg', '45854', '640', '310', '1469240710', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('508', 'http://image3.hc51img.com/2016/07/23/14692665076487.jpg', 'jpg', '52550', '600', '244', '1469266508', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('509', 'http://image3.hc51img.com/2016/07/23/14692665078630.png', 'png', '85734', '1080', '386', '1469266508', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('510', 'http://image3.hc51img.com/2016/07/25/14694377961142.png', 'png', '3286', '320', '120', '1469437797', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('511', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/07/27/14695893438233.jpg', 'jpg', '35612', '512', '288', '1469589344', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('512', 'http://image3.hc51img.com/wap/qianggou/app4.jpg', 'jpg', '133593', '1080', '260', '1469794267', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('513', 'http://image3.hc51img.com/wap/qianggou/wap4-1.jpg', 'jpg', '129932', '640', '370', '1469794267', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('514', 'http://image3.hc51img.com/wap/qianggou/wap4-2.jpg', 'jpg', '110083', '640', '310', '1469794267', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('515', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/01/14700177870141.jpg', 'jpg', '212596', '1600', '1200', '1470017787', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('516', 'http://image3.hc51img.com/2016/08/05/14703982892920.jpg', 'jpg', '53956', '1080', '260', '1470398289', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('517', 'http://image3.hc51img.com/2016/08/05/14703982896267.jpg', 'jpg', '46161', '640', '370', '1470398290', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('518', 'http://image3.hc51img.com/2016/08/05/14703999154091.jpg', 'jpg', '54132', '1080', '260', '1470399916', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('519', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', 'jpg', '46331', '640', '370', '1470399916', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('520', 'http://image3.hc51img.com/2016/08/09/14707104483367.jpg', 'jpg', '46267', '1080', '260', '1470710448', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('521', 'http://image3.hc51img.com/2016/08/09/14707104486482.jpg', 'jpg', '108050', '1920', '340', '1470710449', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('522', 'http://image3.hc51img.com/2016/08/09/14707104488995.jpg', 'jpg', '70430', '640', '370', '1470710449', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('523', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/16/14713487466493.png', 'png', '133724', '640', '1136', '1471348747', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('524', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/16/14713503637516.png', 'png', '125186', '640', '1136', '1471350376', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('525', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/16/14713508864565.png', 'png', '127026', '640', '1136', '1471350887', 'admin');

@@ -31,7 +31,7 @@ class Controller_Ad extends Controller_Website {
             $where['plat'] = array('LIKE' => "%$plat%");
         }
         
-        $m_ad = Model::factory('ad');
+        $m_ad = Model::factory('ad_banner');
         $list = $m_ad->getAll($where)->as_array();
 
         $this->content = View::factory('ad_list');
@@ -39,7 +39,7 @@ class Controller_Ad extends Controller_Website {
     }
 
     public function action_add() {
-        $m_ad = Model::factory('ad');
+        $m_ad = Model::factory('ad_banner');
     
         if (!empty($_POST)) {
             $data = $this->_get_data($_POST);
@@ -57,7 +57,7 @@ class Controller_Ad extends Controller_Website {
     
     public function action_edit() {
         $id = $_GET['id'];
-        $m_ad = Model::factory('ad');
+        $m_ad = Model::factory('ad_banner');
     
         if (!empty($_POST)) {
             $data = $this->_get_data($_POST);
@@ -75,7 +75,7 @@ class Controller_Ad extends Controller_Website {
     
     public function action_del() {
         $id = $_GET['id'];
-        $model = Model::factory('ad');
+        $model = Model::factory('ad_banner');
         $ret = $model->deleteById($id);
         if ($ret !== false) {
             $this->redirect(Request::$referrer);
