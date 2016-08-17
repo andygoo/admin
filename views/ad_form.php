@@ -16,7 +16,23 @@
 	<div class="form-group">
 		<label class="col-sm-1 control-label">图片</label>
 		<div class="col-sm-6">
-		    <input type="url" class="form-control" name="pic_url" value="<?= $info['pic_url'] ?>">
+		    <div class="input-group">
+		        <input class="form-control" type="url" name="pic_url" value="<?= $info['pic_url'] ?>">
+        		<span class="input-group-btn">
+                    <a class="btn btn-info" id="pickfile">+</a>
+                </span>
+            </div>
+		</div>
+	</div>
+	<div class="form-group" id="upcontainer">
+		<label class="col-sm-1 control-label"></label>
+		<div class="col-sm-6" id="fsUploadProgress">
+			<?php if (!empty($info['pic_url'])):?>
+			<div class="up-item">
+			    <button class="close"><span>&times;</span></button>
+                <?= HTML::image($info['pic_url'], array('width'=>160, 'class'=>'img-thumbnail')) ?>
+			</div>
+			<?php endif;?>
 		</div>
 	</div>
 	
@@ -80,5 +96,112 @@ $(function() {
 	} else {
 		$('input[name=city_all]').prop('checked', false);
 	}
+});
+</script>
+
+
+<style>
+.up-item{float:left;width:160px;margin:5px;position:relative}
+.up-item .close{position:absolute;right:3px;top:0;}
+.up-item .img-thumbnail{width:160px;}
+.up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
+</style>
+<?php include __DIR__ . '/plupload.php';?>
+
+<?= HTML::script('media/js/qiniu.js')?>
+<script>
+$(function() {
+    var uploader = Qiniu.uploader({
+        runtimes: 'html5,flash,html4',
+        browse_button: 'pickfile',
+		multi_selection: false,
+        flash_swf_url: '<?= URL::site('media/plupload/Moxie.swf')?>',
+        uptoken_url: '<?= URL::site('qiniu/uptoken')?>',
+        domain: 'http://7xkkhh.com1.z0.glb.clouddn.com/',
+        //uptoken_url: '<?= URL::site('qiniu/uptoken_hc51')?>',
+        //domain: 'http://image3.hc51img.com/',
+		filters: {
+			mime_types: [{
+				title : "图片文件", 
+				extensions: "jpg,gif,png"
+			}],
+            max_file_size : '400kb',
+			prevent_duplicates : true
+	    },
+        // downtoken_url: '/downtoken',
+        // unique_names: true,
+        // save_key: true,
+        // x_vars: {
+        //     'id': '1234',
+        //     'time': function(up, file) {
+        //         var time = (new Date()).getTime();
+        //         // do something with 'time'
+        //         return time;
+        //     },
+        // },
+        auto_start: true,
+        init: {
+            'FilesAdded': function(up, files) {
+                plupload.each(files, function(file) {
+                	var progress = new FileProgress(file, 'fsUploadProgress');
+                	$('.up-item').eq(0).siblings('.up-item').remove();
+
+            		var remove_btn = $('#'+file.id).find('.close');
+            		remove_btn.click(function(){
+            			uploader.removeFile(file);
+            			$(this).parents('.up-item').remove();
+            		});
+                });
+            },
+            'BeforeUpload': function(up, file) {
+            	$('#'+file.id).find('.progress').show();
+            },
+            'UploadProgress': function(up, file) {
+                var progress = new FileProgress(file, 'fsUploadProgress');
+                progress.setProgress(file.percent + "%", file.speed);
+            },
+            'FileUploaded': function(up, file, info) {
+                var progress = new FileProgress(file, 'fsUploadProgress');
+                progress.setComplete(up, file, info);
+                
+                var res = $.parseJSON(info);
+                var domain = up.getOption('domain');
+                var url = domain + res.key;
+                $('#'+file.id).find('img').attr('src', url).load(function() {
+
+                    var image = new Image();
+                    image.src = url;
+                    var w = image.width;
+                    var h = image.height;
+
+                    //$.get('/qiniu/add',{'img_url':url, 'file_size': file.size, 'img_width': w, 'img_height': h},function(){});
+                });
+        		$('input[name=pic_url]').val(url);
+            },
+            'UploadComplete': function() {
+            	//$('#uploadBtn').attr('disabled', true);
+            },
+            'Error': function(up, err, errTip) {
+            },
+            'Key': function(up, file) {
+                var prefix = $.trim($('#prefix').val());
+                if (prefix != '') {
+                    return prefix + file.name;
+                } else {
+                	var file_type = file.name.substr(file.name.lastIndexOf(".")).toLowerCase();
+                	var date = format_time(new Date(), 'yyyy/MM/dd');
+                	var time = new Date().getTime();
+                	var random = Math.floor(Math.random()*9);
+                    var key = date+'/'+time+random+file_type; 
+                    return key;
+                }
+            }
+        }
+    });
+
+	$(document).on('click', '.up-item .close', function(){
+		$(this).parents('.up-item').remove();
+		$('input[name=pic_url]').val('');
+	});
 });
 </script>
