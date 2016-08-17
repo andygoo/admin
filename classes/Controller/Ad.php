@@ -85,6 +85,9 @@ class Controller_Ad extends Controller_Website {
     protected function _get_data($post) {
         $post['plat'] = empty($post['plat']) ? '' : implode('|', $post['plat']);
         $post['city'] = empty($post['city']) ? '' : implode('|', $post['city']);
+        if (count($this->cities) == count($post['city'])) {
+            $post['city'] = '';
+        }
         return array_intersect_key($post, array_flip(array('title','pic_url','link_url','type','order','plat','city')));
     }
 }
