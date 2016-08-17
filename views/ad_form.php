@@ -71,7 +71,7 @@
 		    <?php $city_arr = explode('|', trim($info['city'], '|'))?>
     	    <?php foreach ($cities as $city_id => $city_name):?>
             <label class="checkbox-inline">
-                <input type="checkbox" name="city[]" value="<?= $city_id?>" <?php if (empty($info) || in_array($city_id, $city_arr)):?>checked<?php endif;?>> <?= $city_name?>
+                <input type="checkbox" name="city[]" value="<?= $city_id?>" <?php if (empty($info['city']) || in_array($city_id, $city_arr)):?>checked<?php endif;?>> <?= $city_name?>
             </label>
             <?php endforeach;?>
 		</div>

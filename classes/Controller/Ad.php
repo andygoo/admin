@@ -44,6 +44,7 @@ class Controller_Ad extends Controller_Website {
         if (!empty($_POST)) {
             $data = $this->_get_data($_POST);
             $data['created_at'] = strtotime('now');
+            $data['updated_at'] = strtotime('now');
             $ret = $m_ad->insert($data);
             if ($ret !== false) {
                 $this->redirect('ad/list?type=' . $data['type']);
@@ -84,11 +85,12 @@ class Controller_Ad extends Controller_Website {
     
     protected function _get_data($post) {
         $post['plat'] = empty($post['plat']) ? '' : implode('|', $post['plat']);
-        $post['city'] = empty($post['city']) ? '' : implode('|', $post['city']);
-        if (count($this->cities) == count($post['city'])) {
+        if (empty($post['city']) || count($this->cities) == count($post['city'])) {
             $post['city'] = '';
+        } else {
+            $post['city'] = implode('|', $post['city']);
         }
-        return array_intersect_key($post, array_flip(array('title','pic_url','link_url','type','order','plat','city')));
+        return array_intersect_key($post, array_flip(array('type','title','pic_url','link_url','plat','city')));
     }
 }
 

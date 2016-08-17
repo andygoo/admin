@@ -50,10 +50,15 @@
 <?php foreach($list as $item): ?>
 <?php $plat_arr = explode('|', trim($item['plat'], '|'))?>
 <?php 
-$city_arr = empty($item['city']) ? array() : explode('|', trim($item['city'], '|'));
-$city_arr2 = array();
-foreach ($city_arr as $city_id) {
-    $city_arr2[] = $cities[$city_id];
+if (!empty($item['city'])) {
+    $city_arr = explode('|', trim($item['city'], '|'));
+    $city_arr2 = array();
+    foreach ($city_arr as $city_id) {
+        $city_arr2[] = $cities[$city_id];
+    }
+    $city_str = implode(', ', $city_arr2);
+} else {
+    $city_str = '全部';
 }
 ?>
 <tr>
@@ -71,7 +76,7 @@ foreach ($city_arr as $city_id) {
 	</td>
 	<td><?= date('Y-m-d H:i:s', $item['updated_at']) ?></td>
 	<td><?= implode(', ', $plat_arr) ?></td>
-	<td><?= implode(', ', $city_arr2) ?></td>
+	<td><?= $city_str ?></td>
 	<td>
 	    <a href="<?= URL::site('ad/edit?id='.$item['id']);?>" class="btn btn-info btn-xs ajax-click">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	    <a href="<?= URL::site('ad/del?id='.$item['id']);?>" class="btn btn-info btn-xs ajax-update">删除</a>
