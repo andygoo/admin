@@ -2,15 +2,14 @@
 
 class Controller_Ad extends Controller_Website {
     
-    public $plats = array('pc', 'wap', 'app');
+    public $plats = array('wap', 'app');
     public $cities = array(12=>'北京', 15=>'重庆', 45=>'成都', 103=>'郑州', 113=>'济南', 67=>'苏州');
     public $types = array(
-            'pc_home_top_slider'=>'pc首页顶部轮播图', 
-            'pc_home_mid_banner'=>'pc首页中间运营图', 
-            'wap_home_top_slider'=>'wap首页顶部轮播图', 
-            'app_home_top_slider'=>'app首页顶部轮播图', 
-            'm_home_mid_banner'=>'移动端首页中间运营图',
-            'm_home_btm_posts'=>'移动端首页底部买车分享贴',
+            //'pc_home_top_slider'=>'pc首页顶部轮播图', 
+            //'pc_home_mid_banner'=>'pc首页中间运营图', 
+            'm_home_top_slider'=>'移动端首页顶部轮播图', 
+            'm_home_mid_banner'=>'移动端首页中部运营图',
+            'm_home_btm_posts'=>'移动端首页底部分享贴',
     );
 
     public function before() {
@@ -23,7 +22,8 @@ class Controller_Ad extends Controller_Website {
     
     public function action_list() {
         $where = array();
-        $where['ORDER'] = '`order` ASC, id DESC';
+        //$where['ORDER'] = '`order` ASC, updated_at DESC';
+        $where['ORDER'] = 'updated_at DESC';
         $where['type'] = Arr::get($_GET, 'type', 'pc_home_top_slider');
         $where = array_filter($where);
         $plat = Arr::get($_GET, 'plat');
@@ -46,7 +46,7 @@ class Controller_Ad extends Controller_Website {
             $data['created_at'] = strtotime('now');
             $ret = $m_ad->insert($data);
             if ($ret !== false) {
-                $this->redirect('ad/list');
+                $this->redirect('ad/list?type=' . $data['type']);
             }
         }
         $info = null;
@@ -64,7 +64,7 @@ class Controller_Ad extends Controller_Website {
             $data['updated_at'] = strtotime('now');
             $ret = $m_ad->updateById($data, $id);
             if ($ret !== false) {
-                $this->redirect('ad/list');
+                $this->redirect('ad/list?type=' . $data['type']);
             }
         }
         $info = $m_ad->getRowById($id);
@@ -83,8 +83,8 @@ class Controller_Ad extends Controller_Website {
     }
     
     protected function _get_data($post) {
-        $post['plat'] = empty($post['plat']) ? '' : '|'.implode('|', $post['plat']).'|';
-        $post['city'] = empty($post['city']) ? '' : '|'.implode('|', $post['city']).'|';
+        $post['plat'] = empty($post['plat']) ? '' : implode('|', $post['plat']);
+        $post['city'] = empty($post['city']) ? '' : implode('|', $post['city']);
         return array_intersect_key($post, array_flip(array('title','pic_url','link_url','type','order','plat','city')));
     }
 }

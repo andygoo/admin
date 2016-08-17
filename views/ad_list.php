@@ -11,6 +11,7 @@
             <?php endforeach;?>
         </select>
     </div>
+    <!-- 
     <div class="form-group">
         <select class="form-control" name="plat">
 			<option value="">选择平台</option>
@@ -19,7 +20,6 @@
             <?php endforeach;?>
         </select>
     </div>
-    <!-- 
     <div class="form-group">
         <select class="form-control" name="city">
 			<option value="">选择城市</option>
@@ -38,9 +38,9 @@
 <table class="table table-hover table-bordered">
 <thead>
 <tr>
-	<th>广告位</th>
+	<th>位置</th>
 	<th>标题</th>
-	<th>排序</th>
+	<th>时间</th>
 	<th>平台</th>
 	<th>城市</th>
 	<th width="150">操作</th>
@@ -69,7 +69,7 @@ foreach ($city_arr as $city_id) {
 	    <?php endif;?>
 	</a>
 	</td>
-	<td><?= $item['order'] ?></td>
+	<td><?= date('Y-m-d H:i:s', $item['updated_at']) ?></td>
 	<td><?= implode(', ', $plat_arr) ?></td>
 	<td><?= implode(', ', $city_arr2) ?></td>
 	<td>

@@ -2,9 +2,9 @@
 <form action="" method="post" class="form-horizontal ajax-submit">
 
 	<div class="form-group">
-		<label class="col-sm-1 control-label">广告位</label>
+		<label class="col-sm-1 control-label">位置</label>
 		<div class="col-sm-3">
-            <select class="form-control" name="type">
+            <select class="form-control" name="type" required>
     			<option value=""> - 选择广告位 - </option>
         	    <?php foreach ($types as $key=>$type):?>
     			<option value="<?= $key?>" <?php if($info['type']==$key || Arr::get($_GET, 'type')==$key):?>selected<?php endif;?>><?= $type?></option>
@@ -40,7 +40,7 @@
 		    <?php $plat_arr = explode('|', trim($info['plat'], '|'))?>
     	    <?php foreach ($plats as $item):?>
             <label class="checkbox-inline">
-                <input type="checkbox" name="plat[]" value="<?= $item?>" <?php if (in_array($item, $plat_arr)):?>checked<?php endif;?>> <?= $item?>
+                <input type="checkbox" name="plat[]" value="<?= $item?>" <?php if (empty($info) || in_array($item, $plat_arr)):?>checked<?php endif;?>> <?= $item?>
             </label>
             <?php endforeach;?>
 		</div>
@@ -55,7 +55,7 @@
 		    <?php $city_arr = explode('|', trim($info['city'], '|'))?>
     	    <?php foreach ($cities as $city_id => $city_name):?>
             <label class="checkbox-inline">
-                <input type="checkbox" name="city[]" value="<?= $city_id?>" <?php if (in_array($city_id, $city_arr)):?>checked<?php endif;?>> <?= $city_name?>
+                <input type="checkbox" name="city[]" value="<?= $city_id?>" <?php if (empty($info) || in_array($city_id, $city_arr)):?>checked<?php endif;?>> <?= $city_name?>
             </label>
             <?php endforeach;?>
 		</div>
@@ -73,7 +73,12 @@ $(function() {
 	$('input[name=city_all]').change(function() {
 	    var t = $(this);
 	    var checked = t.prop('checked');
-	    $("input[name='city[]'").prop('checked', checked);
+	    $("input[name='city[]']").prop('checked', checked);
 	});
+	if ($("input[name='city[]']:checked").length == $("input[name='city[]']").length) {
+		$('input[name=city_all]').prop('checked', true);
+	} else {
+		$('input[name=city_all]').prop('checked', false);
+	}
 });
 </script>
