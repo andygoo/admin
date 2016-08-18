@@ -24,7 +24,7 @@ class Controller_Ad extends Controller_Website {
         $where = array();
         //$where['ORDER'] = '`order` ASC, updated_at DESC';
         $where['ORDER'] = 'updated_at DESC';
-        $where['type'] = Arr::get($_GET, 'type', 'pc_home_top_slider');
+        $where['type'] = Arr::get($_GET, 'type', 'm_home_top_slider');
         $where = array_filter($where);
         $plat = Arr::get($_GET, 'plat');
         if (!empty($plat)) {
