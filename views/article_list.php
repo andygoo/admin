@@ -14,9 +14,12 @@ function option($items, $cat_id, $level=0) {
 ?>
 <style>
 .max-line1 {
-	width: 100%;
+    text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;	
 }
 .max-line2 {
     text-overflow: -o-ellipsis-lastline;
@@ -25,6 +28,20 @@ function option($items, $cat_id, $level=0) {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+</style>
+<style>
+.media-body .summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+    overflow: hidden;
+}
+.media-list img {width: 200px;}
+@media (max-width: 425px)  {
+    .media-list img {width: 115px;}	
+    .media-body .summary {display: none;}
 }
 </style>
 
@@ -70,7 +87,7 @@ function option($items, $cat_id, $level=0) {
         <div class="media-body">
             <h4 class="media-heading"><a href="http://haoche.com<?= URL::site('article?id='.$item['id'])?>" target="_blank"><?= $item['title'] ?></a></h4>
             <div class="text-muted max-line1"><?= date('Y-m-d H:i:s', $item['add_time']) ?>  &bull; <?= $item['cat_name'] ?></div>
-            <p class="text-muted max-line2"><?= Text::limit_chars($item['brief'],80) ?></p>
+            <p class="text-muted summary"><?= Text::limit_chars($item['brief'],80) ?></p>
             
             <?php if ($item['status']=='open'):?>
             <a href="<?= URL::site('article/close?id='.$item['id']);?>" class="btn btn-info btn-xs ajax-update">关闭</a>

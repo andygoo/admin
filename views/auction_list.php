@@ -17,6 +17,20 @@
     -webkit-box-orient: vertical;
 }
 </style>
+<style>
+.media-body .summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+    overflow: hidden;
+}
+.media-list img {width: 200px;}
+@media (max-width: 425px)  {
+    .media-list img {width: 115px;}	
+    .media-body .summary {display: none;}
+}
+</style>
 
 <h3 class="page-header">拍品列表 
 <a href="<?= URL::site('auction/add');?>" class="ajax-click">+</a>
@@ -28,9 +42,9 @@
         <div class="media-left">
     	    <?php $pics = json_decode($item['pic'], true); $pic = $pics[0];?>
             <?php if (strpos($pic, '://') !== false):?>
-                <?= HTML::image($pic.'?imageView2/2/w/200/h/200', array('width'=>120)) ?>
+                <?= HTML::image($pic.'?imageView2/2/w/200/h/200') ?>
             <?php else:?>
-                <?= HTML::image('/imagefly/w200-h200-c/' . $pic, array('width'=>120)) ?>
+                <?= HTML::image('/imagefly/w200-h200-c/' . $pic) ?>
             <?php endif;?>
         </div>
         <div class="media-body">
