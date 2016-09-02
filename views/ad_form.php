@@ -1,4 +1,10 @@
 
+<?= HTML::style('media/pikaday/css/pikaday.css')?>
+<?= HTML::script('media/pikaday/js/pikaday.js')?>
+
+<?= HTML::style('media/clockpicker/jquery-clockpicker.min.css')?>
+<?= HTML::script('media/clockpicker/jquery-clockpicker.min.js')?>
+
 <form action="" method="post" class="form-horizontal ajax-submit">
 
 	<div class="form-group">
@@ -78,6 +84,45 @@
 	</div>
 	
 	<div class="form-group">
+		<label class="col-sm-1 control-label">时间</label>
+		<div class="col-sm-6">
+            <label class="checkbox-inline">
+                <input type="checkbox" id="time_btn" name="time_limit" value="1" <?php if (!empty($info['end_time'])):?>checked<?php endif;?>> 限制时间
+            </label>
+		</div>
+	</div>
+	
+	<div class="form-group hid" style="display: none">
+		<label class="col-xs-12 col-sm-1 control-label">开始</label>
+		<div class="col-xs-4 col-sm-2">
+	        <input type="text" class="form-control" name="start_date" id="start_date" value="<?= !empty($info['start_time']) ? date('Y-m-d', $info['start_time']) : ''?>" placeholder="开始日期" readonly>
+    	</div>
+    	<div class="col-xs-5 col-sm-2">
+    		<div class="input-group clockpicker">
+    	        <input type="text" class="form-control" name="start_time" value="<?= !empty($info['start_time']) ? date('H:i', $info['start_time']) : '08:00'?>" placeholder="开始时间" readonly>
+    	        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+        	</div>
+    	</div>
+    </div>
+    
+	<div class="form-group hid" style="display: none">
+		<label class="col-xs-12 col-sm-1 control-label">结束</label>
+		<div class="col-xs-4 col-sm-2">
+	        <input type="text" class="form-control" name="end_date" id="end_date" value="<?= !empty($info['end_time']) ? date('Y-m-d', $info['end_time']) : ''?>" placeholder="结束日期" readonly>
+    	</div>
+    	<div class="col-xs-5 col-sm-2">
+    		<div class="input-group clockpicker">
+    	        <input type="text" class="form-control" name="end_time" value="<?= !empty($info['end_time']) ? date('H:i', $info['end_time']) : '00:00'?>" placeholder="结束时间" readonly>
+    	        <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+        	</div>
+    	</div>
+    </div>
+    
+	<div class="form-group">
 		<div class="col-sm-offset-1 col-sm-3">
 		    <button type="submit" class="btn btn-info">提交</button>
 		</div>
@@ -91,14 +136,45 @@ $(function() {
 	    var checked = t.prop('checked');
 	    $("input[name='city[]']").prop('checked', checked);
 	});
-	if ($("input[name='city[]']:checked").length == $("input[name='city[]']").length) {
-		$('input[name=city_all]').prop('checked', true);
-	} else {
-		$('input[name=city_all]').prop('checked', false);
+	function check_all() {
+    	if ($("input[name='city[]']:checked").length == $("input[name='city[]']").length) {
+    		$('input[name=city_all]').prop('checked', true);
+    	} else {
+    		$('input[name=city_all]').prop('checked', false);
+    	}
 	}
+	$("input[name='city[]']:checked").change(function() {
+		check_all();
+	});
+	check_all();
 });
 </script>
 
+
+<script>
+$(function () {
+    var picker1 = new Pikaday({
+        field: document.getElementById('start_date')
+    });
+    var picker2 = new Pikaday({
+        field: document.getElementById('end_date')
+    });
+    $('.clockpicker').clockpicker({
+        //autoclose: true,
+        'placement' : 'top'
+    });
+    $('#time_btn').change(function() {
+        var t = $(this);
+        var checked = t.prop('checked');
+        if (checked) {
+            $('.hid').show();
+        } else {
+            $('.hid').hide();
+        }
+    });
+    $('#time_btn').change();
+});
+</script>
 
 <style>
 .up-item{float:left;width:160px;margin:5px;position:relative}

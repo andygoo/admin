@@ -1,15 +1,15 @@
 <?php
 
 class Controller_Ad extends Controller_Website {
-    
-    public $plats = array('wap', 'app');
+
+    public $plats = array('wap', 'app', 'pc');
     public $cities = array(12=>'北京', 15=>'重庆', 45=>'成都', 103=>'郑州', 113=>'济南', 67=>'苏州');
     public $types = array(
-            //'pc_home_top_slider'=>'pc首页顶部轮播图', 
-            //'pc_home_mid_banner'=>'pc首页中间运营图', 
-            'm_home_top_slider'=>'移动端首页顶部轮播图', 
+            'm_home_top_slider'=>'移动端首页顶部轮播图',
             'm_home_mid_banner'=>'移动端首页中部运营图',
             'm_home_btm_posts'=>'移动端首页底部分享贴',
+            'pc_home_top_slider'=>'pc首页顶部轮播图',
+            'pc_home_mid_banner'=>'pc首页中间运营图',
     );
 
     public function before() {
@@ -50,10 +50,9 @@ class Controller_Ad extends Controller_Website {
                 $this->redirect('ad/list?type=' . $data['type']);
             }
         }
-        $info = null;
     
         $this->content = View::factory('ad_add');
-        $this->content->info = $info;
+        $this->content->info = null;
     }
     
     public function action_edit() {
@@ -90,7 +89,16 @@ class Controller_Ad extends Controller_Website {
         } else {
             $post['city'] = implode('|', $post['city']);
         }
-        return array_intersect_key($post, array_flip(array('type','title','pic_url','link_url','plat','city')));
+        
+        if (empty($post['time_limit'])) {
+            $post['start_time'] = 0;
+            $post['end_time'] = 0;
+        } else {
+            $post['start_time'] = !empty($post['start_date']) ? strtotime($post['start_date'] . ' ' . $post['start_time']) : 0;
+            $post['end_time'] = !empty($post['end_date']) ? strtotime($post['end_date'] . ' ' . $post['end_time']) : 0;
+        }
+        
+        return array_intersect_key($post, array_flip(array('type','title','pic_url','link_url','plat','city', 'start_time', 'end_time')));
     }
 }
 

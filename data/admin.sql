@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-08-17 16:38:28
+Date: 2016-09-02 20:03:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '103.19.65.58', '1471414547', 'normal');
+INSERT INTO `admin` VALUES ('1', '1', 'admin', '8e2138282ef9f567449e78272e44ac86d19ba37a87db7794211714310b46de91', '218.28.234.213', '1472805674', 'normal');
 INSERT INTO `admin` VALUES ('12', '22', 'admin2', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '103.19.65.58', '1458735276', 'normal');
 INSERT INTO `admin` VALUES ('13', '4', 'test', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
 INSERT INTO `admin` VALUES ('100', '0', '11', '55697d46756378fd4e9d8338a7ddd1c76ced2170693cc32dfaae06fbd5c5e311', '', '0', 'normal');
@@ -63,19 +63,29 @@ CREATE TABLE `ad_banner` (
   `city` varchar(100) NOT NULL DEFAULT '' COMMENT '城市',
   `order` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态',
+  `start_time` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
   PRIMARY KEY (`id`),
   KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ad_banner
 -- ----------------------------
-INSERT INTO `ad_banner` VALUES ('1', 'm_home_top_slider', '豪车一月思考角度上看见', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/17/14714145855076.png', 'http://ddffdf', '0', '1471414587', 'app', '15|45|103|113|67', '0', '1');
-INSERT INTO `ad_banner` VALUES ('4', 'm_home_top_slider', '降价活动开始啦', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', 'http://ddffdf', '1470897102', '1471407523', '|app|', '|12|15|45|103|113|67|', '0', '1');
-INSERT INTO `ad_banner` VALUES ('5', 'm_home_btm_posts', '降价活动开始啦', '', 'http://ddffdf', '1470901806', '1470970403', '|wap|app|', '|12|15|45|103|113|67|', '23', '1');
-INSERT INTO `ad_banner` VALUES ('7', 'm_home_mid_banner', '而日日日日日日日日日日日日日日日日日日日日日', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', '1470969209', '1471420617', 'wap', '15|45|103|113|67', '0', '1');
-INSERT INTO `ad_banner` VALUES ('8', '', '', '', '', '1471407309', '0', '|wap|app|', '|12|15|45|103|113|67|', '0', '1');
-INSERT INTO `ad_banner` VALUES ('9', 'm_home_top_slider', 'w', '', 'http://image3.hc51img.com/2016/08/05/14703999157841.jpg', '1471413289', '0', 'wap|app', '12|15|45|103|113|67', '0', '1');
+INSERT INTO `ad_banner` VALUES ('10', 'm_home_top_slider', '济南体验店', 'http://image3.hc51img.com/2016/08/18/14715038598276.png', 'http://m.haoche51.com', '1471423716', '1471664218', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('11', 'm_home_mid_banner', '【8月大促】4店联动，分期购车服务费5折！', 'http://image3.haoche51.com/o_1apmj2lqd5te1ogatja12cq1r107.jpg', 'http://mp.weixin.qq.com/s?__biz=MjM5MDUxMzkxNw==&mid=2649757885&idx=1&sn=12a8a4a804a3ef95aac22918983b98bb#rd', '1471431476', '1471846162', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('12', 'm_home_btm_posts', '我与好车无忧的一些故事1', 'http://image3.hc51img.com/2016/08/18/14715035232354.png', 'http://m.haoche51.com', '1471431490', '1471503627', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('13', 'm_home_top_slider', '郑州体验店', 'http://image3.hc51img.com/2016/08/18/14715038598276.png', 'http://m.haoche51.com', '1471437392', '1471503875', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('14', 'm_home_mid_banner', '天府之国，好车无忧携手汽车之家购车体验活动', 'http://image3.haoche51.com/o_1aoj4gqr7185b1gl4o501t8akot7.jpg', 'http://bbs.haoche51.com/thread-7434-1-1.html', '1471503208', '1472817773', 'wap|app', '12|15|45|103|113', '0', '1', '1473328800', '1474497000');
+INSERT INTO `ad_banner` VALUES ('15', 'm_home_btm_posts', '我与好车无忧的一些故事33', 'http://image3.hc51img.com/2016/08/18/14715035232354.png', 'http://m.haoche51.com', '1471503226', '1471844531', 'wap|app', '12|15|45|103|113', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('16', 'm_home_btm_posts', '我与好车无忧的一些故事2', 'http://image3.hc51img.com/2016/08/18/14715035232354.png', 'http://m.haoche51.com', '1471503237', '1471503649', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('18', 'm_home_top_slider', '北京体验店', 'http://image3.hc51img.com/2016/08/18/14715038598276.png', 'http://m.haoche51.com', '1471665333', '1471665333', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('19', 'm_home_top_slider', '重庆体验店', 'http://image3.hc51img.com/2016/08/18/14715038598276.png', 'http://m.haoche51.com', '1471665351', '1471665351', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('20', 'm_home_top_slider', '青岛体验店', 'http://image3.hc51img.com/2016/08/18/14715038598276.png', 'http://m.haoche51.com', '1471665373', '1471665373', 'wap|app', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('21', 'pc_home_top_slider', '好车易购，按揭不愁', 'http://image3.hc51img.com/2016/08/09/14707104486482.jpg', 'http://mp.weixin.qq.com/s?__biz=MjM5MDUxMzkxNw==&mid=2649757885&idx=1&sn=12a8a4a804a3ef95aac22918983b98bb#rd', '1471848035', '1471848478', 'pc', '15|45|103|113', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('22', 'pc_home_mid_banner', '分期贷款', 'http://image3.haoche51.com/o_1a8630v2o1t2c3t41kte138gvc97.png', 'http://bj.haoche51.com/daikuan', '1471848135', '1471848259', 'pc', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('23', 'pc_home_mid_banner', '海泉刷脸亲体验', 'http://image3.haoche51.com/o_1a86303hv107198r16p3q3mkb27.jpg', 'http://bj.haoche51.com/haochegushi/detail/41.html', '1471848203', '1471848252', 'pc', '', '0', '1', '0', '0');
+INSERT INTO `ad_banner` VALUES ('24', 'pc_home_mid_banner', '富二代的血泪史— — 揭露二手超跑圈的潜规则', 'http://image3.haoche51.com/o_1aicafsjdecnqcgjgg1tflgav7.jpg', 'http://bbs.haoche51.com/thread-5564-1-1.html', '1471848243', '1471848243', 'pc', '', '0', '1', '0', '0');
 
 -- ----------------------------
 -- Table structure for `article`
@@ -826,7 +836,7 @@ CREATE TABLE `upload_qiniu` (
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `user_name` varchar(20) NOT NULL COMMENT '上传者',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=526 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=562 DEFAULT CHARSET=utf8 COMMENT='七牛上传文件表';
 
 -- ----------------------------
 -- Records of upload_qiniu
@@ -1173,3 +1183,39 @@ INSERT INTO `upload_qiniu` VALUES ('522', 'http://image3.hc51img.com/2016/08/09/
 INSERT INTO `upload_qiniu` VALUES ('523', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/16/14713487466493.png', 'png', '133724', '640', '1136', '1471348747', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('524', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/16/14713503637516.png', 'png', '125186', '640', '1136', '1471350376', 'admin');
 INSERT INTO `upload_qiniu` VALUES ('525', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/16/14713508864565.png', 'png', '127026', '640', '1136', '1471350887', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('526', 'http://image3.hc51img.com/wap/topic/chinalife/71415431.png', 'png', '16092', '640', '450', '1471509064', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('527', 'http://image3.hc51img.com/wap/topic/chinalife/71432574.png', 'png', '37864', '640', '560', '1471509064', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('528', 'http://image3.hc51img.com/wap/topic/chinalife/71433201.png', 'png', '14124', '640', '1280', '1471509064', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('529', 'http://image3.hc51img.com/wap/topic/chinalife/71501137.png', 'png', '65809', '640', '1080', '1471509065', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('530', 'http://image3.hc51img.com/wap/topic/chinalife/71499776.png', 'png', '100860', '640', '1020', '1471509065', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('531', 'http://image3.hc51img.com/wap/topic/chinalife/71500958.png', 'png', '1207', '640', '136', '1471509067', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('532', 'http://image3.hc51img.com/2016/08/19/14715802838491.png', 'png', '3756', '128', '128', '1471580284', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('533', 'http://image3.hc51img.com/wap/topic/chinalife/weixin_300.png', 'png', '18029', '300', '300', '1471590931', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('534', 'http://image3.hc51img.com/wap/topic/chinalife/71415432.png', 'png', '27491', '640', '450', '1471591080', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('535', 'http://7xkkhh.com1.z0.glb.clouddn.com/2016/08/24/14720227163782.png', 'png', '8410', '128', '224', '1472022716', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('536', 'http://image3.hc51img.com/2016/08/24/14720257606155.png', 'png', '122978', '1074', '200', '1472025761', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('537', 'http://image3.hc51img.com/2016/08/25/14720933172328.png', 'png', '37425', '1074', '200', '1472093318', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('538', 'http://image3.hc51img.com/wap/store/15-0.jpg', 'jpg', '154721', '980', '527', '1472178420', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('539', 'http://image3.hc51img.com/wap/store/45-0.jpg', 'jpg', '95230', '980', '527', '1472178420', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('540', 'http://image3.hc51img.com/wap/store/103-0.jpg', 'jpg', '102843', '980', '527', '1472178420', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('541', 'http://image3.hc51img.com/wap/store/103-1.jpg', 'jpg', '102843', '980', '527', '1472178420', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('542', 'http://image3.hc51img.com/wap/store/103-2.jpg', 'jpg', '113418', '980', '527', '1472178420', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('543', 'http://image3.hc51img.com/wap/store/113-0.jpg', 'jpg', '168729', '980', '527', '1472178421', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('544', 'http://image3.hc51img.com/2016/08/26/14721879996520.jpg', 'jpg', '156230', '1920', '340', '1472188002', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('545', 'http://image3.hc51img.com/2016/08/30/14725282978808.png', 'png', '18872', '768', '105', '1472528298', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('546', 'http://image3.hc51img.com/wap/store/113-02.jpg', 'jpg', '123848', '980', '528', '1472529689', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('547', 'http://image3.hc51img.com/wap/store/113-01.jpg', 'jpg', '117062', '980', '528', '1472529689', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('548', 'http://image3.hc51img.com/wap/store/zz/0.jpg', 'jpg', '117062', '980', '528', '1472529769', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('549', 'http://image3.hc51img.com/wap/store/zz/1.jpg', 'jpg', '117062', '980', '528', '1472529769', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('550', 'http://image3.hc51img.com/wap/store/zz/2.jpg', 'jpg', '123848', '980', '528', '1472529769', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('551', 'http://image3.hc51img.com/2016/08/31/14726276799752.png', 'png', '31859', '640', '358', '1472627681', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('552', 'http://image3.hc51img.com/2016/09/02/14728063606141.png', 'png', '16634', '768', '105', '1472806365', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('553', 'http://image3.hc51img.com/2016/09/02/14728074959266.jpg', 'jpg', '201125', '1080', '1920', '1472807504', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('554', 'http://image3.hc51img.com/fev2/banners/pc_17.png', 'png', '90609', '1190', '340', '1472809608', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('555', 'http://image3.hc51img.com/fev2/banners/pc_18.png', 'png', '82243', '1190', '340', '1472809610', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('556', 'http://image3.hc51img.com/fev2/banners/pc_19.png', 'png', '93374', '1190', '340', '1472809610', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('557', 'http://image3.hc51img.com/fev2/banners/pc_20.png', 'png', '91336', '1190', '340', '1472809611', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('558', 'http://image3.hc51img.com/fev2/banners/home/pc17.png', 'png', '91336', '1190', '340', '1472810418', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('559', 'http://image3.hc51img.com/fev2/banners/home/pc18.png', 'png', '90609', '1190', '340', '1472810418', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('560', 'http://image3.hc51img.com/fev2/banners/home/pc19.png', 'png', '82243', '1190', '340', '1472810419', 'admin');
+INSERT INTO `upload_qiniu` VALUES ('561', 'http://image3.hc51img.com/fev2/banners/home/pc20.png', 'png', '93374', '1190', '340', '1472810419', 'admin');
