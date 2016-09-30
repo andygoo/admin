@@ -126,7 +126,7 @@ class Controller_Qiniu extends Controller_Website {
             return false;
         }
     }
-    
+     
     protected function _del_hc51($key) {
         $qiniu_config = Kohana::config('qiniu.haoche51');
         $accessKey = $qiniu_config['access_key'];
