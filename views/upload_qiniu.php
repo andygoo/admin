@@ -27,7 +27,7 @@
 	<td><?= $item['id'] ?></td>
 	<td>
 	<a class="swipe" href="<?= $item['file_src'] ?>" data-size="<?= $item['img_width'] ?>x<?= $item['img_height'] ?>">
-	    <?= HTML::image($item['file_src'].'?imageView2/2/w/80/h/80', array('width'=>80)) ?>
+	    <?= HTML::image($item['file_src'].'?imageView2/2/w/80/h/80', array('style'=>'max-width:80px')) ?>
 	</a>
 	</td>
 	<td><?= strtoupper($item['file_type']) ?></td>
