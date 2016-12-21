@@ -73,6 +73,7 @@ function option($items, $cat_id, $level=0) {
 
 <style>
 div.mce-fullscreen {z-index: 9999;}
+.mce-menubtn.mce-fixed-width span {width:auto}
 </style>
 <?= HTML::script('media/tinymce/tinymce.min.js')?>
 <script type="text/javascript">
@@ -81,9 +82,10 @@ tinyMCE.init({
 	plugins: [
 		  		"advlist autolink lists link image charmap print preview anchor",
 		  		"searchreplace visualblocks code fullscreen imagetools upload",
-		  		"insertdatetime media table contextmenu paste textcolor colorpicker emoticons"
+		  		"insertdatetime media table contextmenu paste textcolor colorpicker emoticons",
+		  		"codesample"
 		  	],
-  	toolbar: "upload undo redo | styleselect fontselect fontsizeselect forecolor | bold italic | link image emoticons | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fullscreen preview",
+  	toolbar: "upload undo redo | styleselect fontselect fontsizeselect forecolor | bold italic | link image emoticons | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | codesample fullscreen preview",
   	autosave_ask_before_unload: false,
   	convert_urls: false,
 	height : 400,
