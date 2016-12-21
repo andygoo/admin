@@ -59,7 +59,7 @@ abbr[data-original-title],abbr[title] {
 
 <style>
 .up-item, .up-files{float:left;width:120px;height:90px;margin-right:6px;margin-bottom:6px;position:relative}
-.up-item .close{position:absolute;right:3px;top:0;}
+.up-item .close, .up-files .close{position:absolute;right:3px;top:0;}
 .up-item .img-thumbnail, .up-files .img-thumbnail{width:120px;height:90px;}
 .up-item .progress{position:absolute;left:0;bottom:0;width:100%;height:8px;margin:0;display:none}
 </style>
@@ -109,10 +109,10 @@ $(function() {
     	var res = info.response;
     	res = eval('('+res+')');
     	if (res.status=='ok') {
-    	    var url = '/imagefly/w120-h90-c'+res.data;
+    	    var url = '/imagefly/w120-h90-c/'+res.data;
     	    $('#'+file.id).find('img').attr('src', url);
     	    
-    	    var ourl = '/imagefly/w800'+res.data;
+    	    var ourl = '/imagefly/w800/'+res.data;
     	    $('#'+file.id).attr('class', 'up-files').find('img').attr('o-src', ourl);
     	}
 	});
