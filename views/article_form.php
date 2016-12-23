@@ -61,7 +61,7 @@ function option($items, $cat_id, $level=0) {
 	<div class="form-group">
 		<label class="col-sm-1 control-label">文章内容</label>
 		<div class="col-sm-11">
-			<textarea id="editor" name="content"><?= $info['content']?></textarea>
+			<textarea id="editor" name="content"><?= htmlspecialchars($info['content'])?></textarea>
 		</div>
 	</div>
 	<div class="form-group">
