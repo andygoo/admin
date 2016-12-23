@@ -89,7 +89,7 @@ tinyMCE.init({
   	autosave_ask_before_unload: false,
   	convert_urls: false,
 	height : 400,
-	content_css: ['<?= URL::site('media/bootstrap/css/bootstrap.min.css')?>','<?= URL::site('media/css/preview.css')?>'],
+	content_css: ['<?= URL::site('media/css/preview.css')?>'],
 	language: 'zh_CN'
 });
 </script>
