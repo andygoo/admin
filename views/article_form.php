@@ -43,7 +43,7 @@ function option($items, $cat_id, $level=0) {
 	</div>
 	<div class="form-group">
 		<label class="col-sm-1 control-label">文章封面</label>
-		<input type="hidden" class="form-control" name="pic" value="<?= $info['pic']?>">
+		<input type="hidden" class="form-control" name="pic[]" value="<?= $info['pic']?>">
 		<div class="col-sm-2" id="fsUploadProgress">
 			<?php if (!empty($info['pic'])):?>
 			<div class="up-item">
@@ -164,13 +164,13 @@ $(function() {
     	if (res.status=='ok') {
     	    var url = '/imagefly/w200-h150-c/'+res.data;
     	    $('#'+file.id).find('img').attr('src', url);
-    	    $('input[name=pic]').val(res.data);
+    	    $('#'+file.id).find('input').val(res.data);
     	}
 	});
 
 	$(document).on('click', '.up-item .close', function(){
 		$(this).parents('.up-item').remove();
-		$('input[name=pic]').val('');
+		//$('input[name=pic]').val('');
 		$('#pickfile').show();
 	});
 });
