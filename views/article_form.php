@@ -83,9 +83,9 @@ tinyMCE.init({
 		  		"advlist autolink lists link image charmap print preview anchor",
 		  		"searchreplace visualblocks code fullscreen imagetools upload",
 		  		"insertdatetime media table contextmenu paste textcolor colorpicker emoticons",
-		  		"codesample"
+		  		"codesample eqneditor"
 		  	],
-  	toolbar: "upload undo redo | styleselect fontselect fontsizeselect forecolor | bold italic | link image emoticons | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | codesample fullscreen preview",
+  	toolbar: "upload undo redo | fontselect fontsizeselect forecolor | bold italic | link image emoticons | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | codesample eqneditor fullscreen preview",
   	autosave_ask_before_unload: false,
   	convert_urls: false,
 	height : 400,
