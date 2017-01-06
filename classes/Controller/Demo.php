@@ -21,5 +21,9 @@ class Controller_Demo extends Controller_Website {
     public function action_math() {
         $this->content = View::factory('demo_math');
     }
+
+    public function action_tree() {
+        $this->content = View::factory('demo_tree');
+    }
 }
 
